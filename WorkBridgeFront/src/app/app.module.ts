@@ -14,6 +14,11 @@ import { ProjectsComponent } from './component/projects/projects.component';
 import { TestimonialComponent } from './component/testimonial/testimonial.component';
 import { TeamComponent } from './component/team/team.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { LoginComponent } from './component/login/login.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SignupComponent } from './component/signup/signup.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -28,11 +33,16 @@ import { FooterComponent } from './component/footer/footer.component';
     ProjectsComponent,
     TestimonialComponent,
     TeamComponent,
-    FooterComponent
+    FooterComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

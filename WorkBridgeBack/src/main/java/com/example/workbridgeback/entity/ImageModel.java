@@ -14,9 +14,7 @@ public class ImageModel {
 
     @Column(length = 50000000)
     private byte[] picByte;
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name = "userId")
-    private User user;
+
 
 
 
@@ -61,7 +59,4 @@ public class ImageModel {
         this.picByte = picByte;
     }
 
-    public void setUser(User user) {
-        this.user=user;
-    }
 }

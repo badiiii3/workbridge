@@ -1,0 +1,46 @@
+<div class="container-xxl py-5 position-relative">
+    <div class="container py-5 px-lg-5 position-relative">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center"><span></span>Login<span></span></p>
+            <h1 class="text-center mb-5">Login to Your Account</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form (ngSubmit)="onSubmit()">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-person"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="username" placeholder="Your Username" [(ngModel)]="model.email" name="username" required>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-lock"></i>
+                                    </span>
+                                    <input type="{{ hidePassword ? 'password' : 'text' }}" class="form-control" id="password" placeholder="Your Password" [(ngModel)]="model.motDePasse" name="password" required>
+                                    <span class="input-group-text" (click)="togglePasswordVisibility()">
+                                        <i class="{{ hidePassword ? 'bi bi-eye-slash':'bi bi-eye'}}"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <a href="#">Forgot Password?</a>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <a href="#" routerLink="/signup">Don't have an account? Sign up here</a>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="submit">Login</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

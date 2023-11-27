@@ -2,8 +2,10 @@ package com.example.workbridgeback.controller;
 
 import com.example.workbridgeback.entity.AuthenticationRequest;
 import com.example.workbridgeback.entity.AuthenticationResponse;
+import com.example.workbridgeback.entity.ImageModel;
 import com.example.workbridgeback.entity.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.example.workbridgeback.service.AuthenticationService;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+
+
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
@@ -20,13 +24,21 @@ public class AuthenticationController {
 
     private final AuthenticationService service;
 
-    @PostMapping(value = "/register")
+    @PostMapping(path = "/register")
     public AuthenticationResponse register(
-            @RequestPart("request") User user,
-            @RequestPart("imageFiles") MultipartFile[] imageFiles
+            @RequestBody() User user
+            // @RequestParam("imageFile") MultipartFile[] file
     ) {
-        return service.register(user, imageFiles);
+
+        try {
+            return service.register(user);
+        } catch (Exception e) {
+            // System.out.println( e.getMessage());
+            return null;
+        }
     }
+
+
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate(
