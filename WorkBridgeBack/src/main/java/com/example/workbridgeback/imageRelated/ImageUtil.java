@@ -44,7 +44,7 @@ public class ImageUtil<T> {
 
     private ImageModel saveImage(T obj, MultipartFile imageFile) throws IOException {
         InputStream inputStream = imageFile.getInputStream();
-        String fileName = "_" + imageFile.getOriginalFilename();
+        String fileName = imageFile.getOriginalFilename();
         String filePath = UPLOAD_DIR + fileName;
 
         try (OutputStream outputStream = new FileOutputStream(new File(filePath))) {
@@ -59,9 +59,9 @@ public class ImageUtil<T> {
         img.setName(fileName);
         img.setType(imageFile.getContentType());
         img.setPicByte(imageFile.getBytes());
-        if(obj instanceof User){
-            img.setUser((User) obj);
-        }
+//        if(obj instanceof User){
+//            img.setUser((User) obj);
+//        }
 
         return img;
     }

@@ -1,7 +1,6 @@
 package com.example.workbridgeback.service;
 
 
-import com.example.workbridgeback.dao.ImageModelDao;
 import com.example.workbridgeback.entity.*;
 import com.example.workbridgeback.imageRelated.ImageUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 @Service
@@ -34,27 +34,37 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
+    @Autowired
+    private ImageService imageService;
 
-    private final ImageUtil imageUtils;  // bech tkamel menna
+    private final ImageUtil imageUtils;
 
     @Transactional
-    public AuthenticationResponse register(User request, MultipartFile[] imageFiles) {
-        // Save images and associate them with the user
+    public AuthenticationResponse register(User u) throws IOException {
 
+
+        Set<ImageModel> userImages;
+        if (u.getUserImages() != null && !u.getUserImages().isEmpty()) {
+            // Use the uploaded images
+            userImages = u.getUserImages();
+        } else {
+            // Set a default image
+            userImages = imageService.getDefaultImage();
+        }
         var user = User.builder()
-                .nom(request.getNom())
-                .prenom(request.getPrenom())
-                .email(request.getEmail())
-                .telephone(request.getTelephone())
-                .motDePasse(passwordEncoder.encode(request.getMotDePasse()))
-                .role(request.getRole())
+                .nom(u.getNom())
+                .prenom(u.getPrenom())
+                .email(u.getEmail())
+                .telephone(u.getTelephone())
+                .motDePasse(passwordEncoder.encode(u.getMotDePasse()))
+                .role(u.getRole())
+                .userImages(userImages)
                 .build();
-        Set<ImageModel> savedImages = imageUtils.saveImages(user, imageFiles);
-        user.setUserImages(savedImages);
+        // Set<ImageModel> images = imageService.getPhoto();
+        //user.setUserImages(userImages);
 
         repository.save(user);
 
-        System.out.println(user);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(user, jwtToken);
@@ -65,6 +75,20 @@ public class AuthenticationService {
                 .build();
     }
 
+
+    public Set<ImageModel> uplodImage(MultipartFile[] multipartFiles) throws IOException{
+
+        Set<ImageModel> imageModels = new HashSet<>();
+
+        for(MultipartFile file: multipartFiles) {
+            ImageModel imageModel = new ImageModel(
+                    file.getOriginalFilename(),
+                    file.getContentType(),
+                    file.getBytes());
+            imageModels.add(imageModel);
+        }
+        return imageModels;
+    }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(
@@ -136,4 +160,3 @@ public class AuthenticationService {
         }
     }
 }
-
