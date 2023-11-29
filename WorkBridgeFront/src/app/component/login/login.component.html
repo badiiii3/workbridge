@@ -7,14 +7,15 @@
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="wow fadeInUp" data-wow-delay="0.3s">
-                    <form (ngSubmit)="onSubmit()">
+                    <form *ngIf="!isLoggedIn"
+                    [formGroup]="loginForm">
                         <div class="row g-3">
                             <div class="col-12">
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i class="bi bi-person"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="username" placeholder="Your Username" [(ngModel)]="model.email" name="username" required>
+                                    <input type="text" class="form-control" id="username" placeholder="Your Username" formControlName="email" name="username" required>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -22,7 +23,7 @@
                                     <span class="input-group-text">
                                         <i class="bi bi-lock"></i>
                                     </span>
-                                    <input type="{{ hidePassword ? 'password' : 'text' }}" class="form-control" id="password" placeholder="Your Password" [(ngModel)]="model.motDePasse" name="password" required>
+                                    <input type="{{ hidePassword ? 'password' : 'text' }}" class="form-control" id="password" placeholder="Your Password" formControlName="motDePasse" name="password" required>
                                     <span class="input-group-text" (click)="togglePasswordVisibility()">
                                         <i class="{{ hidePassword ? 'bi bi-eye-slash':'bi bi-eye'}}"></i>
                                     </span>
@@ -35,7 +36,7 @@
                                 <a href="#" routerLink="/signup">Don't have an account? Sign up here</a>
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Login</button>
+                                <button class="btn btn-primary w-100 py-3" (click)="login()">Login</button>
                             </div>
                         </div>
                     </form>

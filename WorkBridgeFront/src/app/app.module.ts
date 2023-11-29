@@ -18,6 +18,8 @@ import { LoginComponent } from './component/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './component/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './component/home/home.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { HttpClientModule } from '@angular/common/http';
     TeamComponent,
     FooterComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

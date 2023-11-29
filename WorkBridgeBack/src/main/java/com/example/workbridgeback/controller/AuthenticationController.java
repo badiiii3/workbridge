@@ -33,10 +33,11 @@ public class AuthenticationController {
         try {
             return service.register(user);
         } catch (Exception e) {
-            // System.out.println( e.getMessage());
+
             return null;
         }
     }
+
 
 
 
@@ -53,6 +54,7 @@ public class AuthenticationController {
             HttpServletResponse response
     ) throws IOException {
         service.refreshToken(request, response);
+
     }
 
 

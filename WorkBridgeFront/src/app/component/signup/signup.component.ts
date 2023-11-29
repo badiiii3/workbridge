@@ -10,8 +10,7 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  // model: User = { nom: '', prenom: '', email: '', telephone: null, motDePasse: '', role: ''};
-
+  
   hidePassword: boolean = true; // Flag to toggle password visibility
 
   constructor(private authService: AuthService, private router: Router) {} 
@@ -58,50 +57,16 @@ export class SignupComponent {
       role: this.getRole(),
     }    
     this.authService.register(registerModel).subscribe(res=>{
-      console.log(res); 
+      console.log('User registered successfully!');
       this.registerForm.reset();
-      this.router.navigate(['/login']);
-    },err=>{
-      console.log(err);
       
-    })
-
-
-  // const formData = new FormData();
-  //   formData.append('request', JSON.stringify(this.model));
-  
-    
-  //   formData.append('imageFile',JSON.stringify([]));
+    },error=>{
+      console.error('Error registering user:', error);
       
-    
-  
-    
-  //   formData.forEach((value, key) => {
-  //     console.log(`${key}: ${value}`);
-  //   });
-
-
-    
-    
-  //   console.log(formData.forEach(data=>{console.log(data);
-  //   }));
-    
-  
-  //   this.authService.register(formData).subscribe(
-  //     (response) => {
-  //       console.log('Registration successful', response);
-  //       this.router.navigate(['/login']);
-  //     },
-  //     (error) => {
-  //       console.error('Registration error', error);
-  //     }
-  //   );
+    });
+    this.router.navigate(['/login']);
   }
   
-
-
- 
-
   togglePasswordVisibility() {
     // Toggle the flag to show/hide the password
     this.hidePassword = !this.hidePassword;
