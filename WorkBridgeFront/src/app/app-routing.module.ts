@@ -4,10 +4,18 @@ import { LoginComponent } from './component/login/login.component';
 import { TeamComponent } from './component/team/team.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { SignupComponent } from './component/signup/signup.component';
+import { AddServiceComponent } from './component/services/add-service/add-service.component';
+import { ListServiceComponent } from './component/services/list-service/list-service.component';
+import { ServiceResolveService } from './service-resolve.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent }
+  { path: 'signup', component: SignupComponent },
+  { path: 'add-service', component: AddServiceComponent,resolve: {
+    service: ServiceResolveService
+  } },
+  { path: 'list-service', component: ListServiceComponent },
+
 ];
 
 @NgModule({

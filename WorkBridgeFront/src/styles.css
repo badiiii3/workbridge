@@ -2,3 +2,7 @@ body{
     width: 100% !important;
     height: 100% !important;
 }
+@import 'C:\Users\hp\workbridge\WorkBridgeFront\node_modules\bootstrap\dist\css\bootstrap.min.css';
+@import 'C:\Users\hp\workbridge\WorkBridgeFront\node_modules\material-icons\iconfont\material-icons.css';
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";

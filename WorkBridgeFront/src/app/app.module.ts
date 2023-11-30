@@ -18,7 +18,8 @@ import { LoginComponent } from './component/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './component/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { AddServiceComponent } from './component/services/add-service/add-service.component';
+import { ListServiceComponent } from './component/services/list-service/list-service.component';
 
 @NgModule({
   declarations: [
@@ -35,15 +36,17 @@ import { HttpClientModule } from '@angular/common/http';
     TeamComponent,
     FooterComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AddServiceComponent,
+    ListServiceComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
-  ],
+    ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
