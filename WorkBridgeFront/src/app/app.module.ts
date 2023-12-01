@@ -25,6 +25,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import { AddNewProjectComponent } from './component/project/add-new-project/add-new-project.component';
 import { ViewProjectByUserComponent } from './component/project/view-project-by-user/view-project-by-user.component';
+import { UpdateProjectComponent } from './component/project/update-project/update-project.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { ViewProjectByUserComponent } from './component/project/view-project-by-
     LoginComponent,
     SignupComponent,
     AddNewProjectComponent,
-    ViewProjectByUserComponent
+    ViewProjectByUserComponent,
+    UpdateProjectComponent
   ],
   imports: [
     BrowserModule,

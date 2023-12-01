@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
@@ -35,6 +35,7 @@ export class AddNewProjectComponent implements OnInit {
   constructor(private projectService: ProjectService, 
     private sanitizer: DomSanitizer,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +58,7 @@ export class AddNewProjectComponent implements OnInit {
       (response: Project)=>{
         projectForm.reset();
         this.project.projectImages = [];
+        this.goToProjectList();
       },
       (error: HttpErrorResponse)=>{
         console.log("raouia raouia raouia",error)
@@ -64,6 +66,10 @@ export class AddNewProjectComponent implements OnInit {
       );
     
   }
+  goToProjectList() {
+    this.router.navigate(['/showProjectByUser']);
+  }
+
   prepareFormData(project: Project): FormData {
     console.log("prepare form data")
     const formData = new FormData();

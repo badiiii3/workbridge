@@ -7,6 +7,7 @@ import { SignupComponent } from './component/signup/signup.component';
 import { AddNewProjectComponent } from './component/project/add-new-project/add-new-project.component';
 import { ProjectResolveService } from './service/project-resolve.service';
 import { ViewProjectByUserComponent } from './component/project/view-project-by-user/view-project-by-user.component';
+import { UpdateProjectComponent } from './component/project/update-project/update-project.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +17,9 @@ const routes: Routes = [
                  project: ProjectResolveService
                }},
  { path: 'showProjectByUser' , component: ViewProjectByUserComponent },
+ { path: 'update-project/:id', component: UpdateProjectComponent ,resolve: {
+  project: ProjectResolveService
+}},
 ];
 
 @NgModule({

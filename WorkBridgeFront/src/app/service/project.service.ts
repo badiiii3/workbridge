@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Project } from '../model/project.model';
@@ -17,6 +17,11 @@ export class ProjectService {
   public addProject(project: FormData){
     return this.httpClient.post<Project>("http://localhost:9090/addNewProject", project);
   }
+  
+  public updateProject(projectId: number, formData: FormData) {
+    return this.httpClient.put<Project>(`http://localhost:9090/updateProject/${projectId}`, formData);
+  }
+
 
   public getAllProjects(pageNumber:any, searchKeyword: string= ""){
     return this.httpClient.get<Project[]>("http://localhost:9090/getAllProjects?pageNumber="+pageNumber+"&searchKey="+searchKeyword);

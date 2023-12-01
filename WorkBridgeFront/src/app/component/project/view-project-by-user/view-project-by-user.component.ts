@@ -98,7 +98,8 @@ export class ViewProjectByUserComponent {
 
   }*/
 
-  updateProject(projectId:number){
-    this.router.navigate(['/add-project', {projectId: projectId}])
+  updateProject(projectId: number) {
+    // Navigate to the route designed for updating a project, pass projectId as a parameter
+    this.router.navigate(['/update-project', projectId]);
   }
 }
