@@ -73,6 +73,7 @@ onSubmit() {
   }
 }
 
+/*
 // Assurez-vous que la logique de préparation des données FormData est correcte.
 prepareFormData(servic: Servic): FormData {
   const formData = new FormData();
@@ -88,6 +89,30 @@ prepareFormData(servic: Servic): FormData {
       servic.serviceImages[i].file,
       servic.serviceImages[i].file.name
     );
+  }
+
+  return formData;
+}
+*/
+prepareFormData(servic: Servic): FormData {
+  console.log(this.serviceService.updateService);  // Log the value to the console
+
+  const formData = new FormData();
+
+  formData.append(
+    'service',
+    new Blob([JSON.stringify(servic)], { type: 'application/json' })
+  );
+
+  for (let i = 0; i < servic.serviceImages.length; i++) {
+    const image = servic.serviceImages[i];
+    if (image && image.file) {
+      formData.append(
+        'imageFile',
+        image.file,
+        image.file.name || 'defaultFileName'  // Utilisez un nom par défaut si le nom du fichier est indéfini
+      );
+    }
   }
 
   return formData;
