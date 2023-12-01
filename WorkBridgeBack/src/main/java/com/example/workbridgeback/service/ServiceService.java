@@ -5,6 +5,8 @@ import com.example.workbridgeback.dao.ServiceRepository;
 import com.example.workbridgeback.dao.UserDao;
 import com.example.workbridgeback.entity.Servic;
 import com.example.workbridgeback.entity.User;
+import javassist.NotFoundException;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -71,7 +73,32 @@ public class ServiceService {
 
     }
 
+    public Servic updateService(Servic updatedService) {
+        try {
+            // Check if the service already exists in the database
+            Servic existingService = serviceRepository.findById(updatedService.getServiceId()).orElse(null);
 
+            if (existingService != null) {
+                // Update service properties
+                existingService.setNom(updatedService.getNom());
+                existingService.setDescription(updatedService.getDescription());
+                // Update other properties as needed
+
+                // Update images (assuming Servic has a set of images)
+                existingService.setServiceImages(updatedService.getServiceImages());
+
+                // Save the updated service
+                Servic savedService = serviceRepository.save(existingService);
+                return savedService;
+            } else {
+                // Service not found, handle accordingly
+                throw new NotFoundException("Service not found with ID: " + updatedService.getServiceId());
+            }
+        } catch (Exception e) {
+            // Handle exceptions
+            throw new ServiceException("Error updating service", e);
+        }
+    }
 
 
 

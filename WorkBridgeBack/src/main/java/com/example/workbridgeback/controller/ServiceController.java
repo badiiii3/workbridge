@@ -6,6 +6,8 @@ import com.example.workbridgeback.entity.ImageModel;
 import com.example.workbridgeback.entity.Servic;
 import com.example.workbridgeback.entity.User;
 import com.example.workbridgeback.service.ServiceService;
+import javassist.NotFoundException;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,27 +30,27 @@ public class ServiceController {
     private UserDao userDao;
 
 
-    /*@PreAuthorize("hasRole('FREELANCER')")*/
+    //@PreAuthorize("hasRole('FREELANCER')")*/
 
     @Transactional
     @PostMapping(value = {"/addNewService"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public Servic addNewService(@RequestPart("service") Servic servic,
                                 @RequestPart("imageFile") MultipartFile[] file) {
-       // String currentUser = JwtAuthenticationFilter.CURRENT_USER;
-        //User user = userDao.findByEmail(currentUser).get();
-      //  System.out.println("affiche user " + user);
+         String currentUser = JwtAuthenticationFilter.CURRENT_USER;
+        // User user = userDao.findByEmail(currentUser).get();
+         // System.out.println("affiche user " + user);
         try {
             System.out.println("*****************");
 
-        //    servic.setUser(user);
-          //  System.out.println("*****************" + user);
+              //servic.setUser(user);
+            //  System.out.println("*****************" + user);
             Set<ImageModel> images = uplodImage(file);
             System.out.println("*****************" + images);
             servic.setServiceImages(images);
             return serviceService.addNewService(servic);
         } catch (Exception e) {
 
-            System.out.println("aaaaaaaaaaaaaaaaaaaaaaa" + e.getMessage());
+            System.out.println(e.getMessage());
             return servic;
         }
 
@@ -94,7 +96,7 @@ public class ServiceController {
 
     //@PreAuthorize("hasRole('User')")
 
-    //@PreAuthorize("hasRole('Admin')")
+
     @DeleteMapping({"/deleteServiceDetailes/{serviceId}"})
     public void deleteServiceDetailes(@PathVariable("serviceId") Integer serviceId) {
         serviceService.deleteServiceDetails(serviceId);
@@ -108,4 +110,75 @@ public class ServiceController {
         return serviceService.getProductDetails(isSingeServiceCheckout, blogId);
 
     }
+
+    //@PreAuthorize("hasRole('User')")
+
+
+  /*  @PutMapping(value = "/updateService/{serviceId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Servic updateService(
+            @PathVariable("serviceId") Integer serviceId,
+            @RequestPart("service") Servic updatedService,
+            @RequestPart("imageFile") MultipartFile[] file
+    ){
+        String currentUser = JwtAuthenticationFilter.CURRENT_USER;
+        User user = userDao.findByEmail(currentUser).orElse(null);
+
+        try {
+            if (user != null) {
+                Servic existingService = serviceService.getServiceDetailsById(serviceId);
+
+                if (existingService != null && existingService.getUser().getId().equals(user.getId())) {
+                    existingService.setNom(updatedService.getNom());
+                    existingService.setDescription(updatedService.getDescription());
+
+                    Set<ImageModel> images = uplodImage(file);
+                    existingService.setServiceImages(images);
+
+                    return serviceService.addNewService(existingService);
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return updatedService;
+
+    } */
+
+    @PutMapping(value = "/updateService/{serviceId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Servic updateService(
+            @PathVariable("serviceId") Integer serviceId,
+            @RequestPart("service") Servic updatedService,
+            @RequestPart("imageFile") MultipartFile[] file
+    ){
+        try {
+            Servic existingService = serviceService.getServiceDetailsById(serviceId);
+
+            if (existingService != null) {
+                // Mettez à jour les propriétés du service
+                existingService.setNom(updatedService.getNom());
+                existingService.setDescription(updatedService.getDescription());
+                // Mettez à jour d'autres propriétés au besoin
+
+                // Mettez à jour les images (en supposant que Servic a un ensemble d'images)
+                Set<ImageModel> images = uplodImage(file);
+                existingService.setServiceImages(images);
+
+                // Enregistrez le service mis à jour
+                Servic savedService = serviceService.addNewService(existingService);
+                return savedService;
+            } else {
+                // Service non trouvé, gestion en conséquence
+                throw new NotFoundException("Service not found with ID: " + serviceId);
+            }
+        } catch (Exception e) {
+            // Gérez les exceptions
+            throw new ServiceException("Error updating service", e);
+        }
+    }
+
+
 }

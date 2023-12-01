@@ -14,6 +14,7 @@ public interface ServiceRepository extends CrudRepository<Servic, Integer> {
 
     List<Servic> findByUser(User user);
 
+
     List<Servic> findAll(Pageable pageable);
 
     List<Servic> findByNomContainingIgnoreCaseOrDescriptionContainingIgnoreCase(
