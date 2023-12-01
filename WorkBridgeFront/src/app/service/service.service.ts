@@ -29,5 +29,8 @@ public getServiceDetailsById(serviceId: any){
     return this.httpClient.delete("http://localhost:9090/deleteServiceDetailes/"+serviceId);
    }
 
+   public updateService(serviceId: number, formData: FormData) {
+    return this.httpClient.put<Servic>(`http://localhost:9090/updateService/${serviceId}`, formData);
+  }
 
 }

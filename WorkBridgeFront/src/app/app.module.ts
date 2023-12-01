@@ -20,6 +20,7 @@ import { SignupComponent } from './component/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddServiceComponent } from './component/services/add-service/add-service.component';
 import { ListServiceComponent } from './component/services/list-service/list-service.component';
+import { EditServiceComponent } from './component/edit-service/edit-service.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ListServiceComponent } from './component/services/list-service/list-ser
     LoginComponent,
     SignupComponent,
     AddServiceComponent,
-    ListServiceComponent
+    ListServiceComponent,
+    EditServiceComponent
   ],
   imports: [
     BrowserModule,

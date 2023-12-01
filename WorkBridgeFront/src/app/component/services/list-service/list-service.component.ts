@@ -30,6 +30,10 @@ export class ListServiceComponent implements OnInit {
   public addService(): void {
     this.router.navigate(['/add-service']);
   }
+  public updateService(serviceId: number){
+    this.router.navigate(['/edit-service', serviceId]);
+  }
+
 
   searchByKeyword(searchkeyword: any){
     this.pageNumber= 0;
@@ -68,9 +72,7 @@ export class ListServiceComponent implements OnInit {
         console.log(error);}
     );    
   }
-  updateService(serviceId: number){
-    this.router.navigate(['/add-service', {serviceId: serviceId}])
-  }
+
 
   
 }
