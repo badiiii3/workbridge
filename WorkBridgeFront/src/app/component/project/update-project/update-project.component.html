@@ -1,0 +1,88 @@
+<div class="container-xxl py-5 position-relative">
+    <div class="container py-5 px-lg-5 position-relative">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center"><span></span>Update a Project<span></span></p>
+            <h1 class="text-center mb-5">Update Project</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form #projectForm="ngForm" (ngSubmit)="onSubmit()">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                     
+                                    </span>
+                                    <input matInput class="form-control" placeholder="Name" [(ngModel)]="project.projectName" name="nom">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                    
+                                    </span>
+                                    <input matInput class="form-control" placeholder="Description" [(ngModel)]="project.projectDescription" name="description">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                    
+                                    </span>
+                                    <input matInput class="form-control" placeholder="Devis per Hour" [(ngModel)]="project.projectDomain" name="devis_Hrs">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text"></span>
+                                    <input matInput class="form-control" placeholder="Devis per Hour" [(ngModel)]="project.projectDuration" name="devis_Hrs">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text"></span>
+                                    <input matInput class="form-control" placeholder="Devis per Hour" [(ngModel)]="project.projectTechnology" name="devis_Hrs">
+                                </div>
+                            </div>
+                            <div class="input-group">
+            
+                                <select [(ngModel)]="project.projectState" name="status" id="status" class="form-control">
+                                  <option value="To Do">To Do</option>
+                                  <option value="In Progress">In Progress</option>
+                                  <option value="Done">Done</option>
+                                </select>
+                              </div>
+                            <!-- Other input fields remain the same -->
+                            <div class="col-6">
+                                <div class="dropzone" appDrag (files)="fileDropped($event)">
+                                    <div class="text-wrapper">
+                                        <div class="center">Drag and Drop your Img or 
+                                            <a (click)="selectFile.click()" style="color: blueviolet; font-weight: 800; cursor: pointer;">Browse</a>  a Img
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="file" style="display: none;" #selectFile (change)="onFileSelected($event)">
+                                <div class="mt-5">
+                                    <div class="row">
+                                        <div cols="4" rowHeight="1:1">
+                                            <div *ngFor="let file of project.projectImages; let i = index;">
+                                                <div style="position: relative">
+                                                    <span class="btn-remove-image" (click)="removeImages(i)">X</span>
+                                                    <img [src]="file.url" width="100px" height="100px">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <button class="btn py-sm-3 px-sm-5 rounded-pill mt-3 w-100 py-3" id="navbarcouleur" style="color: white;" type="submit">Update project</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

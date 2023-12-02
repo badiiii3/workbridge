@@ -10,9 +10,15 @@
         <div class="collapse navbar-collapse">
             <div class="navbar-nav mx-auto py-0">
                 <a href="" class="nav-item nav-link active">Home</a>
+
+                <a href="" class="nav-item nav-link">About</a>
+                <a href="" class="nav-item nav-link">Service</a>
+                <a routerLink="/showProjectByUser" class="nav-item nav-link">Project</a>
+
                 <a *ngIf="showEntrepriseBoard" class="nav-item nav-link">Entreprise</a>
                 <a *ngIf="showClientBoard" class="nav-item nav-link">client</a>
                 <a *ngIf="showFreelancerBoard" class="nav-item nav-link">Freelancer</a>
+
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu m-0">

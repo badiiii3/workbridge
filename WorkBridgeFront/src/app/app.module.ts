@@ -21,7 +21,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './component/home/home.component';
 import { ProfileComponent } from './component/profile/profile.component';
 
+import { RouterModule } from '@angular/router';
 
+import {MatDialogModule} from '@angular/material/dialog';
+
+import { AddNewProjectComponent } from './component/project/add-new-project/add-new-project.component';
+import { ViewProjectByUserComponent } from './component/project/view-project-by-user/view-project-by-user.component';
+import { UpdateProjectComponent } from './component/project/update-project/update-project.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,8 +44,14 @@ import { ProfileComponent } from './component/profile/profile.component';
     FooterComponent,
     LoginComponent,
     SignupComponent,
+
+    AddNewProjectComponent,
+    ViewProjectByUserComponent,
+    UpdateProjectComponent
+
     HomeComponent,
     ProfileComponent
+
   ],
   imports: [
     BrowserModule,
@@ -47,6 +59,18 @@ import { ProfileComponent } from './component/profile/profile.component';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    RouterModule,
+   
+  
+
+    MatDialogModule,
+   
+  
+   
+  
+   
+
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

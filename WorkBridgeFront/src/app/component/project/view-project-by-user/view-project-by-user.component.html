@@ -1,0 +1,80 @@
+
+
+            <div class="container-xxl py-5 position-relative">
+                <div class="container py-5 px-lg-5 position-relative">
+                  <div class="wow fadeInUp" data-wow-delay="0.1s">
+                    <p class="section-title text-secondary justify-content-center"><span></span><span id="couleur">Your Projects</span><span></span></p>
+                    <h1 class="text-center mb-5">List Projects</h1>
+                  </div>
+                  <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="col-12 text-center">
+                      <!-- Bouton "Add Service" avec le style Bootstrap -->
+                     
+
+                    </div>
+                  </div>
+                  <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="col-12 text-center">
+                      <ul class="list-inline mb-5" id="portfolio-flters">
+                        <li class="mx-2 active" data-filter="*">All</li>
+                        <li class="mx-2" data-filter=".first">To Do</li>
+                        <li class="mx-2" data-filter=".second">In Progress</li>
+                        <li class="mx-2" data-filter=".second">Done</li>
+                        <li class="mx-2" data-filter=".second"routerLink="/add-project">Add Project</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-center align-items-center">
+                    <div id="search-autocomplete" class="form-outline" data-mdb-input-init>
+                      <input 
+                        #searchkeyword
+                        (keyup)="searchByKeyword(searchkeyword.value)"
+                        type="search" id="form1" class="form-control"
+                        matInput name="searchKey" id="searchKey" placeholder="Search any Product"
+                        style="width: 300px;"> <!-- Ajuste la largeur selon tes besoins -->
+                    </div>
+                    <button type="button" class="btn btn-primary rounded-pill py-2 px-4 ms-3 d-none d-lg-block" id="navbarcouleur" data-mdb-ripple-init>
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                
+                  <div *ngIf="showTable">
+                  <!-- Utilise *ngFor pour itérer sur les sous-tableaux de projets -->
+                  <div class="row g-4" *ngFor="let projectsRow of projectsInRows">
+                    <!-- Itère sur les projets dans chaque sous-tableau -->
+                    <ng-container *ngFor="let project of projectsRow">
+                      <div class="col-lg-4 col-md-6 portfolio-item second  wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="rounded overflow-hidden">
+                          <div class="position-relative overflow-hidden">
+                            <img class="img-fluid w-100" [src]="project.projectImages[0].url" alt="">
+                            <div class="portfolio-overlay">
+                              <a class="btn btn-square btn-outline-light mx-1" href='' data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
+                              <button class="btn btn-square btn-outline-light mx-1" href=""><i (click)="updateProject(project.projectId)" class="fa fa-link"></i></button>
+                            
+                              <button class="btn btn-square btn-outline-light mx-1" (click)="deleteProject(project.projectId)"><i class="fa fa-trash"></i></button>
+                            </div>
+                          </div>
+                          <div class="bg-light p-4">
+                            <p class="text-primary fw-medium mb-2">{{ project.projectName}}</p>
+                            <p class="text-primary fw-medium mb-2">{{ project.projectCreated}}</p>
+                            <h5 class="lh-base mb-0">{{ project.projectDescription}}</h5>
+                          </div>
+                        </div>
+                      </div>
+                    </ng-container>
+                  </div>
+                </div>
+                </div>
+              </div>
+              
+          
+
+  
+  
+
+
+
+
+
+  
+  
