@@ -35,11 +35,11 @@ public class ProjectController {
 
 
         try {
-            /*
-            String currentUser = JwtAuthenticationFilter.CURRENT_USER;
-            User user = userDao.findByEmail( currentUser).get();*/
 
-User user=null;
+            String currentUser = JwtAuthenticationFilter.CURRENT_USER;
+            User user = userDao.findByEmail( currentUser).get();
+
+
             project.setUser(user);
 
             Set<ImageModel> images = uplodImage(file);

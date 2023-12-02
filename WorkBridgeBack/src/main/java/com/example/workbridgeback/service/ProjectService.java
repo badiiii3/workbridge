@@ -68,9 +68,9 @@ public class ProjectService {
         return projectDao.findById(id).get();
     }
     public List<Project> getProjectByUser() {
-       /* String currentUser = JwtAuthenticationFilter.CURRENT_USER;
-        User user = userDao.findByEmail( currentUser).get();*/
-        User user=null;
+       String currentUser = JwtAuthenticationFilter.CURRENT_USER;
+        User user = userDao.findByEmail( currentUser).get();
+
         return projectDao.findByUser(user);
     }
     public List<Project> getAllProjects(int pageNumber, String searchKey){
