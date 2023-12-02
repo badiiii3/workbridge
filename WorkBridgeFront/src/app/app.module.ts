@@ -18,6 +18,8 @@ import { LoginComponent } from './component/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './component/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './component/home/home.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 import { RouterModule } from '@angular/router';
 
@@ -42,9 +44,14 @@ import { UpdateProjectComponent } from './component/project/update-project/updat
     FooterComponent,
     LoginComponent,
     SignupComponent,
+
     AddNewProjectComponent,
     ViewProjectByUserComponent,
     UpdateProjectComponent
+
+    HomeComponent,
+    ProfileComponent
+
   ],
   imports: [
     BrowserModule,
