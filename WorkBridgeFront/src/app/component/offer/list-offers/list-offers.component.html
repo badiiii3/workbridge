@@ -1,0 +1,44 @@
+<!--list -->
+<div class="container-xxl py-5">
+  <div class="container py-5 px-lg-5">
+    <div class="wow fadeInUp" data-wow-delay="0.1s">
+      <p class="section-title text-secondary justify-content-center">
+        <span></span><span id="couleur">List offer</span><span></span>
+      </p>
+      <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+        <div class="col-12 text-center">
+          <!-- Bouton "Add offer" avec le style Bootstrap -->
+          <button class="btn btn-primary rounded-pill py-2 px-4 ms-3 d-none d-lg-block" routerLink="/add-offer" id="navbarcouleur">Add Offer</button>
+        </div>
+      </div>
+      <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+        <div class="col-12 text-center">
+          <ul class="list-inline mb-5" id="portfolio-flters">
+            <!-- <li class="mx-2 active" data-filter="*">All</li>-->
+          </ul>
+        </div>
+      </div>
+      <div class="row g-4 portfolio-container"  >
+        <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s" *ngFor="let offer of offersDetails">
+          <div class="rounded overflow-hidden" >
+            <div class="position-relative overflow-hidden">
+              <img class="img-fluid w-100" [src]="offer.offerImages[0].url" alt="" >
+              <div class="portfolio-overlay">
+                <button class="btn btn-square btn-outline-light mx-1"href='' data-lightbox="portfolio"><i class="fa fa-eye"></i></button>
+                <button class="btn btn-square btn-outline-light mx-1" href=""><i class="fa fa-link" (click)="updateOffer(offer.offerId)"></i></button>
+                <button class="btn btn-square btn-outline-light mx-1" ><i class="fa fa-trash" (click)="deleteOffer(offer.offerId)"></i></button>
+              </div>
+            </div>
+            <div class="bg-light p-4">
+              <p class="text-primary fw-medium mb-2">{{ offer.offerTitle}}</p>
+              <h5 class="lh-base mb-0">{{ offer.offerDescription }}</h5>
+              <p class="text-primary fw-medium mb-2">{{ offer.offerCreated}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+  </div>
+  
+</div>

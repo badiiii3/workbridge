@@ -1,6 +1,8 @@
 package com.example.workbridgeback.entity;
 
 
+
+
 import javax.persistence.*;
 
 @Entity
@@ -15,6 +17,8 @@ public class ImageModel {
     @Column(length = 50000000)
     private byte[] picByte;
 
+    @OneToOne
+    private Offer offers;
 
 
 
@@ -59,4 +63,13 @@ public class ImageModel {
         this.picByte = picByte;
     }
 
+
+
+    public Offer getOffer() {
+        return offers;
+    }
+
+    public void setOffer(Offer offers) {
+        this.offers = offers;
+    }
 }

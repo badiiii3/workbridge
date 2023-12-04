@@ -19,7 +19,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './component/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { RouterModule } from '@angular/router';
 
+import { AddNewOfferComponent } from './component/offer/add-new-offer/add-new-offer.component';
+import { ListOffersComponent } from './component/offer/list-offers/list-offers.component';
+import { UpdateofferComponent } from './component/offer/update-offer/update-offer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +39,10 @@ import { HttpClientModule } from '@angular/common/http';
     TeamComponent,
     FooterComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AddNewOfferComponent,
+    ListOffersComponent,
+    UpdateofferComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +50,10 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    RouterModule,
+   
+
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

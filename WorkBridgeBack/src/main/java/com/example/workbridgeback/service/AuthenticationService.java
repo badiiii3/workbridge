@@ -1,6 +1,7 @@
 package com.example.workbridgeback.service;
 
 
+import com.example.workbridgeback.dao.ImageModelDao;
 import com.example.workbridgeback.entity.*;
 import com.example.workbridgeback.imageRelated.ImageUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,23 +35,21 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private ImageService imageService;
-
-    private final ImageUtil imageUtils;
+@Autowired
+private ImageService imageService;
+    private final ImageUtil imageUtils;  // bech tkamel menna
 
     @Transactional
     public AuthenticationResponse register(User u) throws IOException {
-
-
-        Set<ImageModel> userImages;
-        if (u.getUserImages() != null && !u.getUserImages().isEmpty()) {
-            // Use the uploaded images
-            userImages = u.getUserImages();
-        } else {
-            // Set a default image
+        // Save images and associate them with the user
+        Set<ImageModel> userImages ;
+        if(u.getUserImages()!=null && !u.getUserImages().isEmpty()){
+            userImages= u.getUserImages();
+        }else{
             userImages = imageService.getDefaultImage();
         }
+
+
         var user = User.builder()
                 .nom(u.getNom())
                 .prenom(u.getPrenom())
@@ -58,13 +57,14 @@ public class AuthenticationService {
                 .telephone(u.getTelephone())
                 .motDePasse(passwordEncoder.encode(u.getMotDePasse()))
                 .role(u.getRole())
-                .userImages(userImages)
                 .build();
-        // Set<ImageModel> images = imageService.getPhoto();
-        //user.setUserImages(userImages);
+       // Set<ImageModel> images = uplodImage(file);
+
+        //user.setUserImages(images);
 
         repository.save(user);
 
+        System.out.println(user);
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(user, jwtToken);
@@ -74,7 +74,6 @@ public class AuthenticationService {
                 .user(user)
                 .build();
     }
-
 
     public Set<ImageModel> uplodImage(MultipartFile[] multipartFiles) throws IOException{
 
@@ -160,3 +159,4 @@ public class AuthenticationService {
         }
     }
 }
+

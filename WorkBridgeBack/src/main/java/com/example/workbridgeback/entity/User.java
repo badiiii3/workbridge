@@ -2,7 +2,6 @@ package com.example.workbridgeback.entity;
 
 
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,8 +35,8 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
-
-
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "user")
+    private Set<Offer> userOffers;
     @ManyToMany(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
     @JoinTable(name = "user_images",
             joinColumns = {
@@ -46,18 +45,11 @@ public class User implements UserDetails {
             inverseJoinColumns = {
                     @JoinColumn(name = "image_id", nullable = false)
             })
-    private Set<ImageModel> userImages;
+    private Set<ImageModel> UserImages;
 
 
-    public User(Integer id, String nom, String prenom, String email, Integer telephone, String motDePasse, Role role) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.telephone = telephone;
-        this.motDePasse = motDePasse;
-        this.role = role;
-    }
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -94,14 +86,19 @@ public class User implements UserDetails {
         return true;
     }
 
+    public Set<Offer> getUserOffers() {
+        return userOffers;
+    }
 
-
+    public void setUserOffers(Set<Offer> userOffers) {
+        this.userOffers = userOffers;
+    }
 
     public Set<ImageModel> getUserImages(Set<ImageModel> images) {
-        return userImages;
+        return UserImages;
     }
 
     public void setUserImages(Set<ImageModel> userImages) {
-        this.userImages = userImages;
+        UserImages = userImages;
     }
 }
