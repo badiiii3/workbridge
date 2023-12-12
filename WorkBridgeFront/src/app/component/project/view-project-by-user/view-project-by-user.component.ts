@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 import { map } from 'rxjs';
 import { Project } from 'src/app/model/project.model';
 import { ImageProcessingService } from 'src/app/service/image-processing.service';
@@ -24,7 +25,7 @@ export class ViewProjectByUserComponent {
     private router: Router) { }
 
   ngOnInit(): void {
-    this.getAllProjects();
+    this.getAllProjects();     
   }
 
   searchByKeyword(searchkeyword:any){

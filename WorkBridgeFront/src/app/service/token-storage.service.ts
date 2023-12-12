@@ -10,8 +10,11 @@ const USER_KEY = 'auth-user';
 export class TokenStorageService {
 
   signOut(): void {
-    window.sessionStorage.clear();
+    console.log("sign out");
+    
+    localStorage.clear();
   }
+  
 
   public saveToken(token: string): void {
     window.sessionStorage.removeItem(TOKEN_KEY);

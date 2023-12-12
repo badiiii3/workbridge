@@ -1,7 +1,5 @@
 package com.example.workbridgeback.controller;
 
-import com.example.workbridgeback.configuration.JwtAuthenticationFilter;
-import com.example.workbridgeback.dao.ProjectDao;
 import com.example.workbridgeback.dao.UserDao;
 import com.example.workbridgeback.entity.ImageModel;
 import com.example.workbridgeback.entity.Project;
@@ -11,7 +9,6 @@ import javassist.NotFoundException;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +16,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 
 @RestController
 public class ProjectController {
@@ -36,9 +34,9 @@ public class ProjectController {
 
         try {
 
-            String currentUser = JwtAuthenticationFilter.CURRENT_USER;
-            User user = userDao.findByEmail( currentUser).get();
-
+            //String currentUser = JwtAuthenticationFilter.CURRENT_USER;
+            //User user = userDao.findByEmail( currentUser).get();
+            User user = null;
 
             project.setUser(user);
 

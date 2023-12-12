@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
@@ -25,7 +24,7 @@ public class AuthenticationController {
     private final AuthenticationService service;
 
     @PostMapping(path = "/register")
-    public AuthenticationResponse register(
+    public User register(
             @RequestBody() User user
             // @RequestParam("imageFile") MultipartFile[] file
     ) {

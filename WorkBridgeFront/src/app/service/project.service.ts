@@ -38,8 +38,8 @@ export class ProjectService {
    return this.httpClient.delete("http://localhost:9090/deleteProjectDetails/"+projectId);
   }
 
-  public getProjectByUser(): Observable<Project[]> {
-    return this.httpClient.get<Project[]>("http://localhost:9090/getProjectByUser");
+  public getProjectByUser(userId: string): Observable<Project[]> {
+    return this.httpClient.get<Project[]>(`http://localhost:9090/getProjectByUser/${userId}`);
   }
   public getProjectDetails(isSingeProjectCheckout:any,projectId:any){
     return this.httpClient.get<Project[]>("http://localhost:9090/getProjectDetails/"+isSingeProjectCheckout+"/"+projectId);

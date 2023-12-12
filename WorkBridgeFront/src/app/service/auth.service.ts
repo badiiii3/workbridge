@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpBackend, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
 import { Auth } from '../model/auth';
@@ -16,7 +16,10 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  private _openHttpClient: HttpClient;
+  constructor(private http: HttpClient, private handler: HttpBackend) {
+    this._openHttpClient = new HttpClient(handler);
+  }
 
   login(auth: Auth): Observable<any> {
     return this.http.post(`${AUTH_API}authenticate`, auth, httpOptions);
@@ -35,8 +38,7 @@ export class AuthService {
   }
 
   refreshToken(token: string) {
-    return this.http.post(AUTH_API + 'refresh-token', {
-      refreshToken: token
-    }, httpOptions);
+    return this._openHttpClient.post(AUTH_API + 'refresh-token', {},
+      {headers:{"Authorization": "Bearer " + token}});
   }
 }

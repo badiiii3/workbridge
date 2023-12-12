@@ -29,6 +29,8 @@ import { AddNewProjectComponent } from './component/project/add-new-project/add-
 import { ViewProjectByUserComponent } from './component/project/view-project-by-user/view-project-by-user.component';
 import { UpdateProjectComponent } from './component/project/update-project/update-project.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { authInterceptorProviders } from './_helpers/AuthInterceptor';
+import { httpInterceptorProviders } from './_helpers/http.interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +76,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
  
   ],
-  providers: [],
+  providers: [authInterceptorProviders,httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

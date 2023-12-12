@@ -49,11 +49,7 @@ export class AddNewProjectComponent implements OnInit {
   }
  
   addProject(projectForm: NgForm){
-    console.log("aman kharej des valeurs ",projectForm.value);
-   
     const projectFormData = this.prepareFormData(this.project);
-
-    
     this.projectService.addProject(projectFormData).subscribe(
       (response: Project)=>{
         projectForm.reset();

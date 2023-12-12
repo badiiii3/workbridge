@@ -1,10 +1,10 @@
 package com.example.workbridgeback.service;
 
 
+import com.example.workbridgeback.configuration.JwtUtils;
 import com.example.workbridgeback.entity.*;
 import com.example.workbridgeback.imageRelated.ImageUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.example.workbridgeback.configuration.JwtService;
 import com.example.workbridgeback.dao.TokenRepository;
 import com.example.workbridgeback.dao.UserDao;
 
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,7 +30,7 @@ public class AuthenticationService {
     private final UserDao repository;
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
-    private final JwtService jwtService;
+    private final JwtUtils jwtUtils;
     private final AuthenticationManager authenticationManager;
 
     @Autowired
@@ -40,7 +39,7 @@ public class AuthenticationService {
     private final ImageUtil imageUtils;
 
     @Transactional
-    public AuthenticationResponse register(User u) throws IOException {
+    public User register(User u) throws IOException {
 
 
         Set<ImageModel> userImages;
@@ -62,17 +61,10 @@ public class AuthenticationService {
                 .build();
         // Set<ImageModel> images = imageService.getPhoto();
         //user.setUserImages(userImages);
+        
+         return repository.save(user);
 
-        repository.save(user);
 
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
-        saveUserToken(user, jwtToken);
-        return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
-                .user(user)
-                .build();
     }
 
 
@@ -99,8 +91,8 @@ public class AuthenticationService {
         );
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
+        var jwtToken = jwtUtils.generateJwtToken(user);
+        var refreshToken = jwtUtils.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
         return AuthenticationResponse.builder()
@@ -139,16 +131,17 @@ public class AuthenticationService {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
         final String userEmail;
+        System.out.println("saleeeeeeeeeem");
         if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
             return;
         }
         refreshToken = authHeader.substring(7);
-        userEmail = jwtService.extractUsername(refreshToken);
+        userEmail = jwtUtils.getUserNameFromJwtToken(refreshToken);
         if (userEmail != null) {
             var user = this.repository.findByEmail(userEmail)
                     .orElseThrow();
-            if (jwtService.isTokenValid(refreshToken, (UserDetails) user)) {
-                var accessToken = jwtService.generateToken((UserDetails) user);
+            if (jwtUtils.validateJwtToken(refreshToken)) {
+                var accessToken = jwtUtils.generateJwtToken(user);
                 revokeAllUserTokens(user);
                 saveUserToken(user, accessToken);
                 var authResponse = AuthenticationResponse.builder()

@@ -1,18 +1,15 @@
 package com.example.workbridgeback.service;
 
+import com.example.workbridgeback.configuration.JwtUtils;
 import com.example.workbridgeback.dao.ProjectDao;
 import com.example.workbridgeback.dao.UserDao;
-import com.example.workbridgeback.entity.ImageModel;
 import com.example.workbridgeback.entity.Project;
 import com.example.workbridgeback.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import com.example.workbridgeback.configuration.JwtAuthenticationFilter;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.*;
 
 @Service
@@ -68,7 +65,7 @@ public class ProjectService {
         return projectDao.findById(id).get();
     }
     public List<Project> getProjectByUser() {
-       String currentUser = JwtAuthenticationFilter.CURRENT_USER;
+       String currentUser = JwtUtils.CURRENT_USER;
         User user = userDao.findByEmail( currentUser).get();
 
         return projectDao.findByUser(user);
@@ -84,10 +81,10 @@ public class ProjectService {
 
     }
     public List<Project> getProjectByUserAndSearch(int pageNumber, String searchKey) {
-        String currentUser = JwtAuthenticationFilter.CURRENT_USER;
-        User user = userDao.findByEmail(currentUser).orElse(null);
+        //String currentUser = JwtAuthenticationFilter.CURRENT_USER;
+        //User user = userDao.findByEmail(currentUser).orElse(null);
 
-
+            User user = null;
             Pageable pageable = PageRequest.of(pageNumber, 8);
 
             if (searchKey.equals("")) {
@@ -104,10 +101,8 @@ public class ProjectService {
 
         if (isSingeProjectCheckout && projectId != 0) {
             List<Project> list = new ArrayList<>();
-
-            String currentUser = JwtAuthenticationFilter.CURRENT_USER;
+            String currentUser = JwtUtils.CURRENT_USER;
             User user = userDao.findByEmail( currentUser).get();
-           /* User user=null;*/
 
             list =  projectDao.findByUser(user);
 

@@ -21,13 +21,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
     let authReq = req;
-    const token = this.tokenService.getToken();
+    const token = localStorage.getItem("access_token");
     if (token != null) {
       authReq = this.addTokenHeader(req, token);
     }
 
     return next.handle(authReq).pipe(catchError(error => {
-      if (error instanceof HttpErrorResponse && !authReq.url.includes('auth/signin') && error.status === 401) {
+      if (error instanceof HttpErrorResponse && !authReq.url.includes('/login') && error.status === 401) {
         return this.handle401Error(authReq, next);
       }
 
@@ -36,24 +36,29 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+    
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);
 
-      const token = this.tokenService.getRefreshToken();
-
-      if (token)
-        return this.authService.refreshToken(token).pipe(
-          switchMap((token: any) => {
-            this.isRefreshing = false;
-
-            this.tokenService.saveToken(token.accessToken);
-            this.refreshTokenSubject.next(token.accessToken);
+      const rfToken = localStorage.getItem("refresh_token");
+      console.log(rfToken + " hethi hiya li hachti biha");
+      if (rfToken)
+        return this.authService.refreshToken(rfToken).pipe(
+          switchMap((data: any) => {
+            console.log(data);
             
-            return next.handle(this.addTokenHeader(request, token.accessToken));
+            this.isRefreshing = false;
+            localStorage.setItem("access_token",data.access_token);
+            localStorage.setItem("refresh_token",data.refresh_token)
+            this.refreshTokenSubject.next(data.access_token);
+            console.log("about to resend the original request");
+            
+            return next.handle(this.addTokenHeader(request,data.access_token));
           }),
           catchError((err) => {
             this.isRefreshing = false;
+            console.log("failed to resend the original request");
             
             this.tokenService.signOut();
             return throwError(err);
@@ -71,9 +76,6 @@ export class AuthInterceptor implements HttpInterceptor {
   private addTokenHeader(request: HttpRequest<any>, token: string) {
     /* for Spring Boot back-end */
     return request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
-
-    /* for Node.js Express back-end */
-    //return request.clone({ headers: request.headers.set(TOKEN_HEADER_KEY, token) });
   }
 }
 

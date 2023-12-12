@@ -50,13 +50,7 @@ export class LoginComponent {
   roles: string[] = [];
   hidePassword = true;
 
-  ngOnInit(): void {
-    if (this.storageService.isLoggedIn()) {
-      this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().user_details.role;
-      this.router.navigate(['/home']);
-    }
-  }
+  ngOnInit(){}
 
 
 
@@ -68,21 +62,21 @@ export class LoginComponent {
       motDePasse: this.getPassword(),
     }
     const { email, motDePasse } = this.form;
-    console.log(this.form);
+    
 
     this.authService.login(loginModel).subscribe({
       next: data => {
-        console.log('Login successful');
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveRefreshToken(data.refreshToken);
-        this.tokenStorage.saveUser(data);
-        this.storageService.saveUser(data);
+         console.log('Login successful');
+         //console.log(data);
+
+        this.storeCreds(data);
+
+        // UI interactions
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        this.roles = this.storageService.getUser().user_details.role;
-        this.reloadPage();
-        
 
+        // Navigate after login
+        this.router.navigate(['/home']);
       },
       error: err => {
         console.log('Login error', err);
@@ -100,5 +94,17 @@ export class LoginComponent {
 
   togglePasswordVisibility() {
     this.hidePassword = !this.hidePassword;
+  }
+
+
+
+  // Store creds
+  storeCreds(data: any){
+    localStorage.setItem("access_token",data.access_token);
+    localStorage.setItem("refresh_token",data.refresh_token);
+    localStorage.setItem("userId",data.user_details.id);
+    localStorage.setItem("user_role",data.user_details.role);
+    localStorage.setItem("nom",data.user_details.nom)
+    localStorage.setItem("profilePic",data.user_details.userImages[0].picByte);
   }
 }

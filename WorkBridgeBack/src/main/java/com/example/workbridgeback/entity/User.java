@@ -27,7 +27,7 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String nom;
     private String prenom;
     private String email;
@@ -49,7 +49,7 @@ public class User implements UserDetails {
     private Set<ImageModel> userImages;
 
 
-    public User(Integer id, String nom, String prenom, String email, Integer telephone, String motDePasse, Role role) {
+    public User(Long id, String nom, String prenom, String email, Integer telephone, String motDePasse, Role role) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
