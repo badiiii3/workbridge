@@ -28,6 +28,7 @@ public class OfferService {
         return offerDao.save(offer);
     }
     public void deleteOfferDetails(Integer offerId) {
+
         offerDao.deleteById(offerId);
     }
 
@@ -36,9 +37,9 @@ public class OfferService {
         return offerDao.findById(offerId).get();
     }
     public List<Offer> getOfferByUser() {
-        String currentUser = JwtAuthenticationFilter.CURRENT_USER;
-        User user = userDao.findByEmail( currentUser).get();
-
+       /* String currentUser = JwtAuthenticationFilter.CURRENT_USER;
+        User user = userDao.findByEmail( currentUser).get();*/
+        User user=null;
         return offerDao.findByUser(user);
     }
     public List<Offer> getAllOffers(int pageNumber, String searchKey){

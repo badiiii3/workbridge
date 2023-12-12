@@ -1,9 +1,15 @@
 package com.example.workbridgeback.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 @Entity
+@Data
+@Builder
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
