@@ -7,7 +7,7 @@ import { SignupComponent } from './component/signup/signup.component';
 import { AddServiceComponent } from './component/services/add-service/add-service.component';
 import { ListServiceComponent } from './component/services/list-service/list-service.component';
 import { ServiceResolveService } from './service-resolve.service';
-import { EditServiceComponent } from './component/edit-service/edit-service.component';
+import { EditServiceComponent } from './component/services/edit-service/edit-service.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },

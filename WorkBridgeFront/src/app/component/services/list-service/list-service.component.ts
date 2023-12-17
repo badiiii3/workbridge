@@ -56,6 +56,7 @@ export class ListServiceComponent implements OnInit {
          // this.servicesDetails=resp
           console.log(resp);
           
+          
           resp.forEach(s => this.servicesDetails.push(s));
         }, 
         (error: HttpErrorResponse) => {

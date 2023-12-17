@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Servic } from 'src/app/model/servic';
 import { ServiceService } from 'src/app/service/service.service';
-import { FileHandel } from '../../model/file-handel.model';
+import { FileHandel } from '../../../model/file-handel.model';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -73,27 +73,6 @@ onSubmit() {
   }
 }
 
-/*
-// Assurez-vous que la logique de préparation des données FormData est correcte.
-prepareFormData(servic: Servic): FormData {
-  const formData = new FormData();
-
-  formData.append(
-    'service',
-    new Blob([JSON.stringify(servic)], { type: 'application/json' })
-  );
-
-  for (let i = 0; i < servic.serviceImages.length; i++) {
-    formData.append(
-      'imageFile',
-      servic.serviceImages[i].file,
-      servic.serviceImages[i].file.name
-    );
-  }
-
-  return formData;
-}
-*/
 prepareFormData(servic: Servic): FormData {
   console.log(this.serviceService.updateService);  // Log the value to the console
 

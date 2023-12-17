@@ -37,6 +37,7 @@ export class AddServiceComponent implements OnInit {
 
     if(this.servic && this.servic.serviceId){
       this.isNewService=false;
+
     }
 
 
@@ -48,9 +49,11 @@ export class AddServiceComponent implements OnInit {
       (response: Servic)=>{
         serviceForm.reset();
         this.servic.serviceImages = [];
+
       },
       (error: HttpErrorResponse)=>{
         console.log(error)
+
       }
       );
     
@@ -94,6 +97,10 @@ export class AddServiceComponent implements OnInit {
 
   fileDropped(fileHandel : any) {
     this.servic.serviceImages.push(fileHandel);
+  }
+
+  goToServiceList() {
+    this.router.navigate(['/list-service']);
   }
 
 }

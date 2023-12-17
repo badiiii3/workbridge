@@ -152,30 +152,26 @@ public class ServiceController {
     public Servic updateService(
             @PathVariable("serviceId") Integer serviceId,
             @RequestPart("service") Servic updatedService,
-            @RequestPart("imageFile") MultipartFile[] file
+            @RequestPart(value = "imageFile", required = false) MultipartFile[] file
     ){
         try {
             Servic existingService = serviceService.getServiceDetailsById(serviceId);
 
             if (existingService != null) {
-                // Mettez à jour les propriétés du service
                 existingService.setNom(updatedService.getNom());
                 existingService.setDescription(updatedService.getDescription());
-                // Mettez à jour d'autres propriétés au besoin
 
-                // Mettez à jour les images (en supposant que Servic a un ensemble d'images)
-                Set<ImageModel> images = uplodImage(file);
-                existingService.setServiceImages(images);
 
-                // Enregistrez le service mis à jour
+                if (file != null && file.length > 0) {
+                    Set<ImageModel> images = uplodImage(file);
+                    existingService.setServiceImages(images);
+                }
                 Servic savedService = serviceService.addNewService(existingService);
                 return savedService;
             } else {
-                // Service non trouvé, gestion en conséquence
                 throw new NotFoundException("Service not found with ID: " + serviceId);
             }
         } catch (Exception e) {
-            // Gérez les exceptions
             throw new ServiceException("Error updating service", e);
         }
     }

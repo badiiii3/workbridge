@@ -20,7 +20,10 @@ import { SignupComponent } from './component/signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddServiceComponent } from './component/services/add-service/add-service.component';
 import { ListServiceComponent } from './component/services/list-service/list-service.component';
-import { EditServiceComponent } from './component/edit-service/edit-service.component';
+import { EditServiceComponent } from './component/services/edit-service/edit-service.component';
+import { AddDemandeComponent } from './component/demande/add-demande/add-demande.component';
+import { ListDemandeComponent } from './component/demande/list-demande/list-demande.component';
+import { EditDemandeComponent } from './component/demande/edit-demande/edit-demande.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { EditServiceComponent } from './component/edit-service/edit-service.comp
     SignupComponent,
     AddServiceComponent,
     ListServiceComponent,
-    EditServiceComponent
+    EditServiceComponent,
+    AddDemandeComponent,
+    ListDemandeComponent,
+    EditDemandeComponent
   ],
   imports: [
     BrowserModule,
