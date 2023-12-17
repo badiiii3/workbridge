@@ -27,8 +27,9 @@ public class ProjectController {
     private UserDao userDao;
 
 
-    @PostMapping(value = {"/addNewProject"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public Project addNewProject(@RequestPart("project") Project project,
+    @PostMapping(value = {"/addNewProject/{userId}"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public Project addNewProject(@PathVariable("userId") String userId,
+                                 @RequestPart("project") Project project,
                                  @RequestPart("imageFile") MultipartFile[] file) {
 
 
@@ -36,7 +37,7 @@ public class ProjectController {
 
             //String currentUser = JwtAuthenticationFilter.CURRENT_USER;
             //User user = userDao.findByEmail( currentUser).get();
-            User user = null;
+            User user = userDao.findUserById(Long.valueOf(userId));
 
             project.setUser(user);
 
@@ -111,10 +112,12 @@ public class ProjectController {
         return projectService.getProjectByUser();
 
     }
-    @GetMapping({"/getAllProjectsUser"})
-    public List<Project> getAllProjectsUser(@RequestParam(defaultValue = "0") int pageNumber,
+    @GetMapping({"/getAllProjectsUser/{userId}"})
+    public List<Project> getAllProjectsUser(
+            @PathVariable("userId") String userId,
+            @RequestParam(defaultValue = "0") int pageNumber,
                                         @RequestParam(defaultValue = "") String searchKey) {
-        return projectService.getProjectByUserAndSearch(pageNumber, searchKey);
+        return projectService.getProjectByUserAndSearch(userId,pageNumber, searchKey);
     }
 
     @GetMapping({"/getAllProjects"})

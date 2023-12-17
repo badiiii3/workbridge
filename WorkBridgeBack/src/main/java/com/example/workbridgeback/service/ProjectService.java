@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.*;
 
@@ -80,11 +81,11 @@ public class ProjectService {
         }
 
     }
-    public List<Project> getProjectByUserAndSearch(int pageNumber, String searchKey) {
+    public List<Project> getProjectByUserAndSearch(String userId, int pageNumber, String searchKey) {
         //String currentUser = JwtAuthenticationFilter.CURRENT_USER;
         //User user = userDao.findByEmail(currentUser).orElse(null);
+        User user = userDao.findUserById(Long.valueOf(userId));
 
-            User user = null;
             Pageable pageable = PageRequest.of(pageNumber, 8);
 
             if (searchKey.equals("")) {

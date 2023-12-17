@@ -41,7 +41,8 @@ export class ViewProjectByUserComponent {
 
   public getAllProjects(searchKey: string =""){
     this.showTable = false;
-    this.projectService.getAllProjectsUser(this.pageNumber, searchKey)
+    const userId = localStorage.getItem("userId")!;
+    this.projectService.getAllProjectsUser(userId,this.pageNumber, searchKey)
     .pipe(
       map((x: Project[], i) => x.map((project: Project) => this.imageProcessingService.createImages(project)))
     )

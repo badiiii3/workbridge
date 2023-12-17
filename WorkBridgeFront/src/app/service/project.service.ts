@@ -14,8 +14,8 @@ export class ProjectService {
   constructor(private httpClient: HttpClient) { }
 
 
-  public addProject(project: FormData){
-    return this.httpClient.post<Project>("http://localhost:9090/addNewProject", project);
+  public addProject(UserId: String,project: FormData){
+    return this.httpClient.post<Project>(`http://localhost:9090/addNewProject/${UserId}`, project);
   }
   
   public updateProject(projectId: number, formData: FormData) {
@@ -23,11 +23,11 @@ export class ProjectService {
   }
 
 
-  public getAllProjects(pageNumber:any, searchKeyword: string= ""){
+  public getAllProjects(pageNumber:any, searchKeyword: String= ""){
     return this.httpClient.get<Project[]>("http://localhost:9090/getAllProjects?pageNumber="+pageNumber+"&searchKey="+searchKeyword);
   }
-  public getAllProjectsUser(pageNumber:any, searchKeyword: string= ""){
-    return this.httpClient.get<Project[]>("http://localhost:9090/getAllProjectsUser?pageNumber="+pageNumber+"&searchKey="+searchKeyword);
+  public getAllProjectsUser(UserId: String,pageNumber:any, searchKeyword: String= ""){
+    return this.httpClient.get<Project[]>(`http://localhost:9090/getAllProjectsUser/${UserId}?pageNumber=`+pageNumber+`&searchKey=`+searchKeyword);
   }
 
   public getProjectDetailsById(projectId: any){

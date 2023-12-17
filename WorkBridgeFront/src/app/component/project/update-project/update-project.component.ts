@@ -54,30 +54,30 @@ ngOnInit(): void {
 
 // Assurez-vous que la fonction onSubmit est correctement définie.
 onSubmit() {
-  const formData = this.prepareFormData(this.project);
+  // const formData = this.prepareFormData(this.project);
 
-  if (!formData) {
-    console.error('Form data is null.');
-    return;
-  }
+  // if (!formData) {
+  //   console.error('Form data is null.');
+  //   return;
+  // }
 
-  if (this.isNewProject) {
-    this.projectService.addProject(formData).subscribe(
-      (data: Project) => {
-        console.log('Project Details Response:', data);
-        this.goToProjectList();
-      },
-      (error: HttpErrorResponse) => console.error(error)
-    );
-  } else {
-    this.projectService.updateProject(this.project.projectId, formData).subscribe(
-      (data: Project) => {
-        console.log('Project Details Updated:', data);
-        this.goToProjectList();
-      },
-      (error: HttpErrorResponse) => console.error('HTTP Error:', error)
-    );
-  }
+  // if (this.isNewProject) {
+  //   this.projectService.addProject(formData).subscribe(
+  //     (data: Project) => {
+  //       console.log('Project Details Response:', data);
+  //       this.goToProjectList();
+  //     },
+  //     (error: HttpErrorResponse) => console.error(error)
+  //   );
+  // } else {
+  //   this.projectService.updateProject(this.project.projectId, formData).subscribe(
+  //     (data: Project) => {
+  //       console.log('Project Details Updated:', data);
+  //       this.goToProjectList();
+  //     },
+  //     (error: HttpErrorResponse) => console.error('HTTP Error:', error)
+  //   );
+  // }
 }
 
 // Assurez-vous que la logique de préparation des données FormData est correcte.

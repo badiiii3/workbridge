@@ -12,17 +12,12 @@ import { TokenStorageService } from 'src/app/service/token-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+  private bleep: HTMLAudioElement = new Audio();
   constructor(
     private authService: AuthService,
     private storageService: StorageService,
     private tokenStorage: TokenStorageService, private router: Router) {
-      router.events.subscribe(event => {
-        if (event instanceof NavigationStart) {
-          console.log('NavigationStart:', event);
-        } else if (event instanceof NavigationEnd) {
-          console.log('NavigationEnd:', event);
-        }
-      });
+      this.bleep.src = "../assets/Mouse-Click.mp3";
      }
 
 
@@ -50,13 +45,18 @@ export class LoginComponent {
   roles: string[] = [];
   hidePassword = true;
 
-  ngOnInit(){}
+  ngOnInit(){
+    console.log("Audio source:", this.bleep.src);
+
+  }
 
 
 
 
 
   login(): void {
+
+    this.bleep.play();
     const loginModel: Auth = {
       email: this.getEmail(),
       motDePasse: this.getPassword(),

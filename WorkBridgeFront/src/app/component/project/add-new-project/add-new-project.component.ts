@@ -50,14 +50,17 @@ export class AddNewProjectComponent implements OnInit {
  
   addProject(projectForm: NgForm){
     const projectFormData = this.prepareFormData(this.project);
-    this.projectService.addProject(projectFormData).subscribe(
+    const userId = localStorage.getItem("userId")!;
+    console.log(localStorage.getItem("userId"));
+    
+    this.projectService.addProject(userId,projectFormData).subscribe(
       (response: Project)=>{
         projectForm.reset();
         this.project.projectImages = [];
         this.goToProjectList();
       },
       (error: HttpErrorResponse)=>{
-        console.log("raouia raouia raouia",error)
+        console.log(error)
       }
       );
     
@@ -67,7 +70,7 @@ export class AddNewProjectComponent implements OnInit {
   }
 
   prepareFormData(project: Project): FormData {
-    console.log("prepare form data")
+   
     const formData = new FormData();
 
     formData.append(
