@@ -8,7 +8,6 @@ import { NavbarComponent } from './component/navbar/navbar.component';
 import { FeatureComponent } from './component/feature/feature.component';
 import { AboutComponent } from './component/about/about.component';
 import { FactsComponent } from './component/facts/facts.component';
-import { ServiceComponent } from './component/service/service.component';
 import { NewsletterComponent } from './component/newsletter/newsletter.component';
 import { ProjectsComponent } from './component/projects/projects.component';
 import { TestimonialComponent } from './component/testimonial/testimonial.component';
@@ -31,6 +30,12 @@ import { UpdateProjectComponent } from './component/project/update-project/updat
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { authInterceptorProviders } from './_helpers/AuthInterceptor';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { AddServiceComponent } from './component/services/add-service/add-service.component';
+import { EditServiceComponent } from './component/services/edit-service/edit-service.component';
+import { ListServiceComponent } from './component/services/list-service/list-service.component';
+import { CommonModule } from '@angular/common';
+import { TestComponent } from './test/test.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +44,6 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     FeatureComponent,
     AboutComponent,
     FactsComponent,
-    ServiceComponent,
     NewsletterComponent,
     ProjectsComponent,
     TestimonialComponent,
@@ -53,8 +57,12 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     UpdateProjectComponent,
 
     HomeComponent,
-    ProfileComponent
-
+    ProfileComponent,
+    AddServiceComponent,
+    EditServiceComponent,
+    ListServiceComponent,
+    ViewProjectByUserComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -63,11 +71,11 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule,
-   
+    CommonModule,
   
 
     MatDialogModule,
-               BrowserAnimationsModule,
+    BrowserAnimationsModule,
    
   
    
@@ -76,6 +84,7 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
 
  
   ],
+  
   providers: [authInterceptorProviders,httpInterceptorProviders],
   bootstrap: [AppComponent]
 })

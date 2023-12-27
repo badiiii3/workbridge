@@ -8,11 +8,11 @@ import { ImageProcessingService } from 'src/app/service/image-processing.service
 import { ProjectService } from 'src/app/service/project.service';
 
 @Component({
-  selector: 'app-view-project-by-user',
-  templateUrl: './view-project-by-user.component.html',
-  styleUrls: ['./view-project-by-user.component.css']
+  selector: 'app-test',
+  templateUrl: './test.component.html',
+  styleUrls: ['./test.component.css']
 })
-export class ViewProjectByUserComponent {
+export class TestComponent {
   showLoadMoreProductButton = false;
   showTable = false;
   pageNumber: number = 0;
@@ -40,8 +40,8 @@ export class ViewProjectByUserComponent {
 
   public getAllProjects(searchKey: string =""){
     this.showTable = false;
-    const userId = localStorage.getItem("userId")!;
-    this.projectService.getAllProjectsUser(userId,this.pageNumber, searchKey)
+   // const userId = localStorage.getItem("userId")!;
+    this.projectService.getAllProjects(this.pageNumber, searchKey)
     .pipe(
       map((x: Project[], i) => x.map((project: Project) => this.imageProcessingService.createImages(project)))
     )
@@ -102,5 +102,8 @@ export class ViewProjectByUserComponent {
   updateProject(projectId: number) {
     // Navigate to the route designed for updating a project, pass projectId as a parameter
     this.router.navigate(['/update-project', projectId]);
+  }
+  postuler(projectId:number){
+    this.router.navigate(['/apply' , projectId]);
   }
 }

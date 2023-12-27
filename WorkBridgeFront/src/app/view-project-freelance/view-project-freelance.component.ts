@@ -7,12 +7,13 @@ import { Project } from 'src/app/model/project.model';
 import { ImageProcessingService } from 'src/app/service/image-processing.service';
 import { ProjectService } from 'src/app/service/project.service';
 
+
 @Component({
-  selector: 'app-view-project-by-user',
-  templateUrl: './view-project-by-user.component.html',
-  styleUrls: ['./view-project-by-user.component.css']
+  selector: 'app-view-project-freelance',
+  templateUrl: './view-project-freelance.component.html',
+  styleUrls: ['./view-project-freelance.component.css']
 })
-export class ViewProjectByUserComponent {
+export class ViewProjectFreelanceComponent {
   showLoadMoreProductButton = false;
   showTable = false;
   pageNumber: number = 0;
@@ -40,8 +41,7 @@ export class ViewProjectByUserComponent {
 
   public getAllProjects(searchKey: string =""){
     this.showTable = false;
-    const userId = localStorage.getItem("userId")!;
-    this.projectService.getAllProjectsUser(userId,this.pageNumber, searchKey)
+      this.projectService.getAllProjects(this.pageNumber, searchKey)
     .pipe(
       map((x: Project[], i) => x.map((project: Project) => this.imageProcessingService.createImages(project)))
     )
@@ -55,7 +55,6 @@ export class ViewProjectByUserComponent {
         }else{
           this.showLoadMoreProductButton=false;
         }
-        // this.productDetails = resp;
       }, (error: HttpErrorResponse) => {
         console.log(error);
       }
@@ -67,40 +66,8 @@ export class ViewProjectByUserComponent {
     this.getAllProjects();
   }
 
-  deleteProject(projectId:number){
-    this.projectService.deleteProject(projectId).subscribe(
-      (resp)=> {
-        this.getAllProjects();
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);}
-    );    
-  }
-  get projectsInRows(): Project[][] {
-    const projectsCopy = [...this.projectDetails];
-    const projectsInRows: Project[][] = [];
-
-    while (projectsCopy.length > 0) {
-      projectsInRows.push(projectsCopy.splice(0, 3));
-    }
-
-    return projectsInRows;
-  }
-/*
-  showImages(product: Product){
-    console.log(product);
-    this.imagesDialog.open(ShowProductImagesDialogComponent, {
-      data: {
-        images: product.productImages
-      },
-      height: '500px',
-      width: '800px'
-    });
-
-  }*/
-
-  updateProject(projectId: number) {
+  postuler(projectId: number) {
     // Navigate to the route designed for updating a project, pass projectId as a parameter
-    this.router.navigate(['/update-project', projectId]);
+    this.router.navigate(['/postuler-project', projectId]);
   }
 }

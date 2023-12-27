@@ -38,7 +38,7 @@ public class ProjectController {
             //String currentUser = JwtAuthenticationFilter.CURRENT_USER;
             //User user = userDao.findByEmail( currentUser).get();
             User user = userDao.findUserById(Long.valueOf(userId));
-
+            System.out.println(user);
             project.setUser(user);
 
             Set<ImageModel> images = uplodImage(file);
@@ -120,11 +120,13 @@ public class ProjectController {
         return projectService.getProjectByUserAndSearch(userId,pageNumber, searchKey);
     }
 
-    @GetMapping({"/getAllProjects"})
-    public List<Project> getAllProjects(@RequestParam(defaultValue = "0") int pageNumber
-            , @RequestParam(defaultValue = "") String searchKey) {
+
+    @GetMapping("/getAllProjects")
+    public List<Project> getAllProjects(@RequestParam(defaultValue = "0") int pageNumber,
+                                        @RequestParam(defaultValue = "") String searchKey) {
         return projectService.getAllProjects(pageNumber, searchKey);
     }
+
     @GetMapping({"/getProjectDetailsById/{projectId}"})
     public Project getProjectDetailsById(@PathVariable("projectId") Integer projectId) {
 

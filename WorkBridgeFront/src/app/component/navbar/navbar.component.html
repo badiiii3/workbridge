@@ -16,7 +16,11 @@
 
                 <!-- <a *ngIf="showEntrepriseBoard" class="nav-item nav-link">Entreprise</a> -->
                 <a routerLink="/showProjectByUser" *ngIf="showClientBoard" class="nav-item nav-link">client</a>
-                <a *ngIf="showFreelancerBoard" class="nav-item nav-link">Freelancer</a>
+                <a routerLink="/apply" *ngIf="showFreelancerBoard" class="nav-item nav-link">Apply </a>
+
+
+                <a routerLink="/showServiceByUser" *ngIf="showFreelancerBoard" class="nav-item nav-link">Service</a>
+
 
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
