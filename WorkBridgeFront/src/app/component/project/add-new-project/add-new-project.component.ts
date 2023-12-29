@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { Project } from 'src/app/model/project.model';
 import { ProjectService } from 'src/app/service/project.service';
 import { FileHandel } from 'src/app/model/file-handel.model';
+import { FormsModule } from '@angular/forms';
 
 import { format } from 'date-fns';
 

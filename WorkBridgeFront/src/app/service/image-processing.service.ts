@@ -31,7 +31,26 @@ export class ImageProcessingService {
     project.projectImages = projectImagesToFileHandle;
     return project;
   }
+  public createImages2(demande: any){
+    const projectImages: any[] = demande.demandeImages;
 
+    const projectImagesToFileHandle: FileHandel[] = [];
+
+    for(let i=0; i<projectImages.length; i++){
+      const imageFileData = projectImages[i];
+      const imageBlob = this.dataURItoBlob(imageFileData.picByte, imageFileData.type);
+      const imageFile = new File([imageBlob], imageFileData.name, { type: imageFileData.type});
+
+      const finalFileHandel : FileHandel = {
+        file: imageFile,
+        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageFile))
+      };
+
+      projectImagesToFileHandle.push(finalFileHandel);
+    }
+    demande.demandeImages = projectImagesToFileHandle;
+    return demande;
+  }
   public createImages1(servic: Servic){
     const projectImages: any[] = servic.serviceImages;
 

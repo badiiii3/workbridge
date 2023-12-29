@@ -35,6 +35,9 @@ import { EditServiceComponent } from './component/services/edit-service/edit-ser
 import { ListServiceComponent } from './component/services/list-service/list-service.component';
 import { CommonModule } from '@angular/common';
 import { TestComponent } from './test/test.component';
+import { AddDemandeComponent } from './component/demande/add-demande/add-demande.component';
+
+
 
 @NgModule({
   declarations: [
@@ -62,7 +65,10 @@ import { TestComponent } from './test/test.component';
     EditServiceComponent,
     ListServiceComponent,
     ViewProjectByUserComponent,
-    TestComponent
+    TestComponent,
+    AddDemandeComponent,
+  
+ 
   ],
   imports: [
     BrowserModule,

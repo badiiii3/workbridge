@@ -19,15 +19,16 @@ import { ViewProjectFreelanceComponent } from './view-project-freelance/view-pro
 
 import { BrowserModule } from '@angular/platform-browser';
 import { TestComponent } from './test/test.component';
+import { AddDemandeComponent } from './component/demande/add-demande/add-demande.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'add-project', component: AddNewProjectComponent, resolve: { project: ProjectResolveService } },
   { path: 'showProjectByUser', component: ViewProjectByUserComponent },
-  { path: 'apply', component: TestComponent },
-
+  { path: 'Projects', component: TestComponent },
   { path: 'showProjectFreelance', component: ViewProjectFreelanceComponent },
+  { path: 'apply/:id', component: AddDemandeComponent},
 
   { path: 'update-project/:id', component: UpdateProjectComponent, resolve: { project: ProjectResolveService } },
   { path: 'add-service', component: AddServiceComponent },

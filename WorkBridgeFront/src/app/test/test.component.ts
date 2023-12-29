@@ -34,9 +34,7 @@ export class TestComponent {
     this.getAllProjects(searchkeyword);
 
   }
-  public addService(): void {
-    this.router.navigate(['/add-project']);
-  }
+
 
   public getAllProjects(searchKey: string =""){
     this.showTable = false;
@@ -100,7 +98,6 @@ export class TestComponent {
   }*/
 
   updateProject(projectId: number) {
-    // Navigate to the route designed for updating a project, pass projectId as a parameter
     this.router.navigate(['/update-project', projectId]);
   }
   postuler(projectId:number){

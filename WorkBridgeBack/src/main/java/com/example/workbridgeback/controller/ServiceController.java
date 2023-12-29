@@ -3,7 +3,6 @@ package com.example.workbridgeback.controller;
 
 import com.example.workbridgeback.dao.UserDao;
 import com.example.workbridgeback.entity.ImageModel;
-import com.example.workbridgeback.entity.Project;
 import com.example.workbridgeback.entity.Servic;
 import com.example.workbridgeback.entity.User;
 import com.example.workbridgeback.service.ServiceService;
