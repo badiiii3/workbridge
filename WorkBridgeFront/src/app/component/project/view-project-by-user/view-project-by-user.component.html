@@ -48,9 +48,9 @@
                           <div class="position-relative overflow-hidden">
                             <img class="img-fluid w-100" [src]="project.projectImages[0].url" alt="">
                             <div class="portfolio-overlay">
-                              <a class="btn btn-square btn-outline-light mx-1" href='' data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                               <button class="btn btn-square btn-outline-light mx-1" href=""><i (click)="updateProject(project.projectId)" class="fa fa-link"></i></button>
-                            
+                              <button class="btn btn-square btn-outline-light mx-1" (click)="showDevis(project.projectId)"><i class="fa fa-eye"></i></button>
+
                               <button class="btn btn-square btn-outline-light mx-1" (click)="deleteProject(project.projectId)"><i class="fa fa-trash"></i></button>
                             </div>
                           </div>

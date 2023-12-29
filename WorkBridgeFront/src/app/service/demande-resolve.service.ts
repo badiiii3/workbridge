@@ -36,9 +36,9 @@ export class DemandeResolveService implements Resolve<Demande>{
         montant: 0,
         duree_propose: 0,
         description: "",
-        etat: "To Do",
+        etat: "Pending",
         demandeImages: [],
-        user :null ,
+        freelance :null ,
         project :null
    
         }

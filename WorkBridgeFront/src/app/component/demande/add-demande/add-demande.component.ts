@@ -19,9 +19,9 @@ export class AddDemandeComponent {
     montant: 0,
     duree_propose: 0,
     description: "",
-    etat: "To Do",
+    etat: "Pending",
     demandeImages: [],
-    user :null ,
+    freelance :null ,
     project :null
   };
 
@@ -54,7 +54,7 @@ export class AddDemandeComponent {
     
   }
   goToDemandeList() {
-    this.router.navigate(['/showProjectByUser']);
+    this.router.navigate(['/showDemandeByUser']);
   }
 
   prepareFormData(demande: Demande): FormData {

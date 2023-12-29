@@ -103,4 +103,8 @@ export class ViewProjectByUserComponent {
     // Navigate to the route designed for updating a project, pass projectId as a parameter
     this.router.navigate(['/update-project', projectId]);
   }
+  showDevis(projectId: number) {
+    // Navigate to the route designed for updating a project, pass projectId as a parameter
+    this.router.navigate(['/ShowDemandeByProject', projectId]);
+  }
 }

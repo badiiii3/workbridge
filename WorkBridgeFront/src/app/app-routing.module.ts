@@ -20,6 +20,8 @@ import { ViewProjectFreelanceComponent } from './view-project-freelance/view-pro
 import { BrowserModule } from '@angular/platform-browser';
 import { TestComponent } from './test/test.component';
 import { AddDemandeComponent } from './component/demande/add-demande/add-demande.component';
+import { ListDemandeFreelanceComponent } from './component/demande/list-demande-freelance/list-demande-freelance.component';
+import { ListDemandeClientComponent } from './component/demande/list-demande-client/list-demande-client.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +35,11 @@ const routes: Routes = [
   { path: 'update-project/:id', component: UpdateProjectComponent, resolve: { project: ProjectResolveService } },
   { path: 'add-service', component: AddServiceComponent },
   { path: 'showServiceByUser', component: ListServiceComponent },
+  { path: 'ShowDemandeByProject/:id', component: ListDemandeClientComponent },
+
+
+  { path: 'showDemandeByUser', component: ListDemandeFreelanceComponent },
+
   { path: 'edit-service/:id', component: EditServiceComponent, resolve: { service: ServiceResolveService }},
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },

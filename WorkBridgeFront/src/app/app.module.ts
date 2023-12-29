@@ -36,6 +36,9 @@ import { ListServiceComponent } from './component/services/list-service/list-ser
 import { CommonModule } from '@angular/common';
 import { TestComponent } from './test/test.component';
 import { AddDemandeComponent } from './component/demande/add-demande/add-demande.component';
+import { ListDemandeClientComponent } from './component/demande/list-demande-client/list-demande-client.component';
+import { ListDemandeFreelanceComponent } from './component/demande/list-demande-freelance/list-demande-freelance.component';
+import { ShowDemandeImageDialogComponent } from './component/demande/show-demande-image-dialog/show-demande-image-dialog.component';
 
 
 
@@ -67,6 +70,9 @@ import { AddDemandeComponent } from './component/demande/add-demande/add-demande
     ViewProjectByUserComponent,
     TestComponent,
     AddDemandeComponent,
+    ListDemandeFreelanceComponent,
+    ListDemandeClientComponent,
+    ShowDemandeImageDialogComponent,
   
  
   ],

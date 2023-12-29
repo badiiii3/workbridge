@@ -7,6 +7,6 @@ export interface Demande {
     description: String,
     etat: String,
     demandeImages: FileHandel[],
-    user :any ,
+    freelance :any ,
     project :any
 }

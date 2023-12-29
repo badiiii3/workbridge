@@ -1,0 +1,47 @@
+<!-- list-demande-freelance.component.html -->
+
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+      <div class="wow fadeInUp" data-wow-delay="0.1s">
+        <p class="section-title text-secondary justify-content-center">
+          <span></span><span id="couleur">List Demands</span><span></span>
+        </p>
+     
+        <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="col-12 text-center">
+            <!-- Additional filters or categories can be added here -->
+            <ul class="list-inline mb-5" id="portfolio-flters">
+            </ul>
+          </div>
+        </div>
+        <div class="row g-4 portfolio-container">
+          <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s" *ngFor="let demande of demandeDetails">
+            <div class="rounded overflow-hidden">
+              <div class="bg-light p-4">
+                <!-- Display demand details -->
+                <p class="text-primary fw-medium mb-2">Project: {{ demande.project.projectName }} </p>
+
+                <p class="card-text">Montant: {{ demande.montant }}</p>
+                <p class="card-text">Duree Propose: {{ demande.duree_propose }}</p>
+                <p class="card-text">Description: {{ demande.description }} </p>
+
+                <p class="card-text">Etat: {{ demande.etat }} </p>
+                <p class="card-text">Username: {{ demande.freelance.email}}</p>
+
+              </div>
+              <div class="position-relative overflow-hidden">
+                <div class="placeholder-image" style="color: aliceblue;" >No Image</div>
+                <div class="portfolio-overlay">
+                  <button class="btn btn-square btn-outline-light mx-1" href='' data-lightbox="portfolio"><i class="fa fa-eye"></i></button>
+                  <button mat-icon-button color="primary" (click)="showImages(demande)">
+                </button>
+                  <button class="btn btn-square btn-outline-light mx-1" ><i class="fa fa-trash" (click)="deleteDemande(demande.demandeId)"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
