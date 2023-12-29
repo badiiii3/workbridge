@@ -10,6 +10,11 @@ import { ProjectResolveService } from './service/project-resolve.service';
 import { ViewProjectByUserComponent } from './component/project/view-project-by-user/view-project-by-user.component';
 import { UpdateProjectComponent } from './component/project/update-project/update-project.component';
 
+import { AddNewOfferComponent } from './component/offer/add-new-offer/add-new-offer.component';
+import { OfferResolveService } from './service/offer-resolve.service';
+import { ListOffersComponent } from './component/offer/list-offers/list-offers.component';
+import { UpdateofferComponent } from './component/offer/update-offer/update-offer.component';
+
 import { HomeComponent } from './component/home/home.component';
 import { ProfileComponent } from './component/profile/profile.component';
 
@@ -29,8 +34,15 @@ const routes: Routes = [
 
   { path: 'home', component: HomeComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
-
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'add-offer', component: AddNewOfferComponent , 
+  resolve: {
+         offer: OfferResolveService
+       }},
+{ path: 'list-offers' , component: ListOffersComponent },
+{ path: 'update-offer/:id', component: UpdateofferComponent ,resolve: {
+offer: OfferResolveService
+}},
 ];
 
 @NgModule({

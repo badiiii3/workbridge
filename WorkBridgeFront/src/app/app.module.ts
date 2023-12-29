@@ -31,6 +31,9 @@ import { UpdateProjectComponent } from './component/project/update-project/updat
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { authInterceptorProviders } from './_helpers/AuthInterceptor';
 import { httpInterceptorProviders } from './_helpers/http.interceptor';
+import { AddNewOfferComponent } from './component/offer/add-new-offer/add-new-offer.component';
+import { ListOffersComponent } from './component/offer/list-offers/list-offers.component';
+import { UpdateofferComponent } from './component/offer/update-offer/update-offer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +56,10 @@ import { httpInterceptorProviders } from './_helpers/http.interceptor';
     UpdateProjectComponent,
 
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddNewOfferComponent,
+    ListOffersComponent,
+    UpdateofferComponent
 
   ],
   imports: [
