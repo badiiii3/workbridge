@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DemandeService {
@@ -36,15 +37,16 @@ public class DemandeService {
     }
 
     public Demande updateDemandeEtat(Demande demande) {
-        if (demandeDao.existsById(demande.getDemandeId())) {
-            Demande existingDemande = demandeDao.findById(demande.getDemandeId()).orElse(null);
+        Optional<Demande> existingDemande = demandeDao.findById(demande.getDemandeId());
+        if (existingDemande.isPresent()) {
+            Demande actualDemande = existingDemande.get();
+            actualDemande.setEtat(demande.getEtat());
 
-            existingDemande.setEtat(demande.getEtat());
+            return demandeDao.save(actualDemande);
+        } else {
 
-            return demandeDao.save(existingDemande);
+            return null;
         }
-
-        return demande;
     }
 
     public List<Demande> getDemandesByFreelance(String userId) {
@@ -59,7 +61,7 @@ public class DemandeService {
         if (project != null) {
             return (List<Demande>) demandeDao.findByProject(project);
         } else {
-            return Collections.emptyList(); // or throw an exception, or handle accordingly
+            return Collections.emptyList();
         }
 
     }

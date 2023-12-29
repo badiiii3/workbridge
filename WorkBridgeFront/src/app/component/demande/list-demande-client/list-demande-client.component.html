@@ -32,9 +32,11 @@
               <div class="position-relative overflow-hidden">
                 <div class="placeholder-image" style="color: aliceblue;" >No Image</div>
                 <div class="portfolio-overlay">
-                  <button class="btn btn-square btn-outline-light mx-1" href='' data-lightbox="portfolio"><i class="fa fa-eye"></i></button>
-                  <button mat-icon-button color="primary" (click)="showImages(demande)">
+
+                  <button  class="btn btn-square btn-outline-light" (click)="showImages(demande)"><i class="fa fa-eye"></i>
                 </button>
+                <button class="btn btn-square btn-outline-light mx-1" ><i class="fa fa-check" (click)="accepter(demande.demandeId)"></i></button>
+
                   <button class="btn btn-square btn-outline-light mx-1" ><i class="fa fa-trash" (click)="deleteDemande(demande.demandeId)"></i></button>
                 </div>
               </div>
