@@ -1,0 +1,19 @@
+/* star-rating.component.css */
+.star-rating {
+    cursor: pointer;
+  }
+  
+  .star {
+    font-size: 24px;
+    color: #ccc;
+  }
+  
+  .filled {
+    color: gold;
+  }
+  .star-rating {
+    font-size: 1em;
+    color: #ffc107;
+  }
+  
+  

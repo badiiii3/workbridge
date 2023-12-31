@@ -1,0 +1,85 @@
+
+.comment-container {
+    width: calc(33.33% - 10px); /* Adjust as needed for spacing between comments */
+    margin-bottom: 10px; /* Adjust as needed for spacing between comments */
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    max-height: 150px; /* Adjust as needed */
+    overflow-y: auto;/* Break long words and wrap onto the next line */
+
+}
+.comment-text {
+    white-space: pre-line; /* Preserve line breaks and spaces */
+    word-wrap: break-word;
+    white-space: pre-line; /* Preserve line breaks and spaces */
+    overflow-wrap: break-word;
+
+  }
+.comment-container:nth-child(3n + 1) {
+    clear: left;
+  }
+.user-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.comment-content {
+    flex: 1;
+}
+
+.comment-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px; /* Adjust as needed for spacing between rows */
+  }
+.comment-header,
+.comment-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.comment-date {
+    font-size: 12px;
+    color: #707070;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    color: #FFD700; /* Gold color for stars */
+    margin-right: 5px;
+}
+
+.comment-content {
+    font-size: 16px;
+    line-height: 1.5;
+}
+.log{
+    white-space: pre-line;
+
+}

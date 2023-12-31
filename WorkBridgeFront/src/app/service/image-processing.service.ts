@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileHandel } from '../model/file-handel.model';
 import { Servic } from '../model/servic.model';
+import { User } from '../model/user';
 
 
 @Injectable({
@@ -84,5 +85,10 @@ export class ImageProcessingService {
     return blob;
 
   }
+  
+  
+  
+
+
 
 }

@@ -27,7 +27,7 @@ export class ProjectService {
   }
   
 
-  public getAllProjectsUser(UserId: String,pageNumber:any, searchKeyword: String= ""){
+  public getAllProjectsUser(UserId: any,pageNumber:any, searchKeyword: String= ""){
     return this.httpClient.get<Project[]>(`http://localhost:9090/getAllProjectsUser/${UserId}?pageNumber=`+pageNumber+`&searchKey=`+searchKeyword);
   }
 

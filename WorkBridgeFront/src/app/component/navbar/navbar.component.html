@@ -36,8 +36,8 @@
 
             <ul class="navbar-nav mx-auto py-0">
                 <li class="nav-item" *ngIf="isLoggedIn">
-                    <a class="nav-link costomize-nav-item" routerLink="profile">{{ username }}</a>
-                </li>
+                    <div *ngIf="user">
+                        <a class="nav-link costomize-nav-item" (click)="profile(user.id)">{{ username }}</a></div>                </li>
                 <li class="nav-item nav-link" *ngIf="isLoggedIn">
                     <a class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block" (click)="logout()">Sign Out</a>
                 </li>
