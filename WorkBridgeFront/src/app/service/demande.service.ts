@@ -1,21 +1,26 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Demande } from '../model/demande.model';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class DemandeService {
 
   constructor(private httpClient: HttpClient) { }
-
+  private baseUrl = 'http://localhost:9090/updateDemandeEtat'
 
   public addDemande(UserId: String, projectId: String , demande: FormData){
     return this.httpClient.post<Demande>(`http://localhost:9090/addNewDemande/${UserId}/${projectId}`, demande);
   }
   
-  public updateDemandeEtat(demandeId: number, formData: FormData) {
-    return this.httpClient.put<Demande>(`http://localhost:9090/updateDemandeEtat/${demandeId}`, formData);
+  
+  updateDemande(demandeId: any, value: any): Observable<Object> {
+    return this.httpClient.put(`${this.baseUrl}/${demandeId}`, value);
   }
+  
+  
+
   public getDemandeDetailsById(demandeId: any){
     return this.httpClient.get<Demande>("http://localhost:9090/getDemandeDetailsById/"+demandeId);
    }

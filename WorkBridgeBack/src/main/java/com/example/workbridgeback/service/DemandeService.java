@@ -36,18 +36,21 @@ public class DemandeService {
         demandeDao.deleteById(demande_id);
     }
 
-    public Demande updateDemandeEtat(Demande demande) {
-        Optional<Demande> existingDemande = demandeDao.findById(demande.getDemandeId());
-        if (existingDemande.isPresent()) {
-            Demande actualDemande = existingDemande.get();
-            actualDemande.setEtat(demande.getEtat());
 
-            return demandeDao.save(actualDemande);
-        } else {
 
-            return null;
+        public Demande updateDemandeEtat(Integer demandeId, String newEtat) {
+            Optional<Demande> existingDemande = demandeDao.findById(demandeId);
+            if (existingDemande.isPresent()) {
+                Demande actualDemande = existingDemande.get();
+                actualDemande.setEtat(newEtat);
+
+                return demandeDao.save(actualDemande);
+            } else {
+                return null; // Ou tu peux lever une exception selon le cas.
+            }
         }
-    }
+
+
 
     public List<Demande> getDemandesByFreelance(String userId) {
 

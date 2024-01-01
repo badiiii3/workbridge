@@ -1,12 +1,15 @@
 package com.example.workbridgeback.controller;
 
+import com.example.workbridgeback.dao.DemandeDao;
 import com.example.workbridgeback.dao.ProjectDao;
 import com.example.workbridgeback.dao.UserDao;
 import com.example.workbridgeback.entity.*;
 import com.example.workbridgeback.service.DemandeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +24,8 @@ public class DemandeController {
     private ProjectDao projectDao;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private DemandeDao demandeDao;
     @Autowired
     private DemandeService demandeService;
 
@@ -85,12 +90,21 @@ public class DemandeController {
         demandeService.deleteDemandeDetails(demandeId);
     }
 
-    @PutMapping({"/updateDemandeEtat/{demandeId}"})
-    public void updateDemandeEtat(@PathVariable("demandeId") Integer demandeId,
-                                  @RequestPart("demande") Demande updatedDemande
-                                  ){
-        demandeService.updateDemandeEtat(updatedDemande);
+    @PutMapping("/updateDemandeEtat/{demandeId}")
+    public ResponseEntity<Demande> update(@PathVariable  Integer demandeId,
+                                              @RequestBody Demande p) {
+        Demande demande = demandeDao.findById(demandeId)
+                .orElseThrow();
+
+        demande.setEtat(p.getEtat());
+
+
+
+
+        Demande updateProfile = demandeDao.save(demande);
+        return ResponseEntity.ok(updateProfile);
     }
+
     @GetMapping({"/getDemandeDetails/{isSingeDemandeCheckout}/{demandeId}"})
     public List<Demande> getDemandeDetails(@PathVariable(name="isSingeDemandeCheckout") boolean isSingeDemandeCheckout,
                                            @PathVariable(name= "demandeId") Integer demandeId) {

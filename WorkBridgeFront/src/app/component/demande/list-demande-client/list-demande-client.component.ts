@@ -14,7 +14,7 @@ import { ShowDemandeImageDialogComponent } from 'src/app/component/demande/show-
   styleUrls: ['./list-demande-client.component.css']
 })
 export class ListDemandeClientComponent {
-  demande: any ;
+  demande!: Demande ;
   public title = 'Liste Demande';
   showLoadMoreProductButton = false;
   showTable = false;
@@ -34,29 +34,21 @@ export class ListDemandeClientComponent {
       this.getDemandeByProject();
     
   }
-  public accepter(demandeId: number){
-     this.demande.etat = "valid";
-
-    
+  public accepter(demandeId: number) {
+   
     this.demandeService.getDemandeDetailsById(demandeId).subscribe(
       (data: Demande) => {
-        this.demande = data;
-        console.log('demande Details:', this.demande);
-
+        this.demande = data; // Assurez-vous que le modèle est correctement initialisé ici
+        console.log('Project Details:', data);
       },
       (error: HttpErrorResponse) => console.error(error)
     );
-    const formData = this.prepareFormData(this.demande);
-
-  //  this.demande.etat = "valid";
-    console.log("test valid" , this.demande);
-    this.demandeService.updateDemandeEtat(demandeId , formData).subscribe(
-        (data: Demande) => {
-        console.log('Demande Details Updated:', data);
-     },
-        (error: HttpErrorResponse) => console.error('HTTP Error:', error)
-     );
- }
+    this.demande.etat='Valid';
+    this.demandeService.updateDemande(demandeId, this.demande).subscribe( data =>{
+    
+    }
+    , error => console.log(error));
+  }
 
   public getDemandeByProject(){
     this.showTable = false;
@@ -106,28 +98,6 @@ export class ListDemandeClientComponent {
     });
 
   }
-  prepareFormData(demande: Demande): FormData {
-    console.log(this.demandeService.updateDemandeEtat);  // Log the value to the console
-  
-    const formData = new FormData();
-  
-    formData.append(
-      'service',
-      new Blob([JSON.stringify(demande)], { type: 'application/json' })
-    );
-  
-    for (let i = 0; i < demande.demandeImages.length; i++) {
-      const image = demande.demandeImages[i];
-      if (image && image.file) {
-        formData.append(
-          'imageFile',
-          image.file,
-          image.file.name || 'defaultFileName'  // Utilisez un nom par défaut si le nom du fichier est indéfini
-        );
-      }
-    }
-  
-    return formData;
-  }
+
 }
 
