@@ -1,0 +1,6 @@
+/* styles.css */
+.scrollable-list {
+    max-height: 400px; /* ou la hauteur maximale que vous souhaitez */
+    overflow-y: auto;
+  }
+  

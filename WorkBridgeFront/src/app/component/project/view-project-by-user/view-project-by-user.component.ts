@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { jwtDecode } from 'jwt-decode';
 import { map } from 'rxjs';
 import { Project } from 'src/app/model/project.model';
 import { ImageProcessingService } from 'src/app/service/image-processing.service';
@@ -101,5 +100,9 @@ export class ViewProjectByUserComponent {
   updateProject(projectId: number) {
     // Navigate to the route designed for updating a project, pass projectId as a parameter
     this.router.navigate(['/update-project', projectId]);
+  }
+  showDevis(projectId: number) {
+    // Navigate to the route designed for updating a project, pass projectId as a parameter
+    this.router.navigate(['/ShowDemandeByProject', projectId]);
   }
 }

@@ -16,8 +16,6 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-
 @RestController
 public class ProjectController {
 
@@ -31,14 +29,10 @@ public class ProjectController {
     public Project addNewProject(@PathVariable("userId") String userId,
                                  @RequestPart("project") Project project,
                                  @RequestPart("imageFile") MultipartFile[] file) {
-
-
         try {
 
-            //String currentUser = JwtAuthenticationFilter.CURRENT_USER;
-            //User user = userDao.findByEmail( currentUser).get();
             User user = userDao.findUserById(Long.valueOf(userId));
-
+            System.out.println(user);
             project.setUser(user);
 
             Set<ImageModel> images = uplodImage(file);
@@ -62,7 +56,6 @@ public class ProjectController {
             Project existingProject = projectService.getProjectDetailsById(projectId);
 
             if (existingProject != null) {
-                // Mettez à jour les propriétés du service
                 existingProject.setProjectName(updatedProject.getProjectName());
                 existingProject.setProjectDescription(updatedProject.getProjectDescription());
                 existingProject.setProjectCreated(updatedProject.getProjectCreated());
@@ -70,26 +63,19 @@ public class ProjectController {
                 existingProject.setProjectDomain(updatedProject.getProjectDomain());
                 existingProject.setProjectState(updatedProject.getProjectState());
                 existingProject.setProjectTechnology(updatedProject.getProjectTechnology());
-                // Mettez à jour d'autres propriétés au besoin
 
-                // Mettez à jour les images (en supposant que Servic a un ensemble d'images)
                 Set<ImageModel> images = uplodImage(file);
                 existingProject.setProjectImages(images);
 
-                // Enregistrez le service mis à jour
                 Project savedProject = projectService.addNewProject(existingProject);
                 return savedProject;
             } else {
-                // Service non trouvé, gestion en conséquence
                 throw new NotFoundException("Service not found with ID: " + projectId);
             }
         } catch (Exception e) {
-            // Gérez les exceptions
             throw new ServiceException("Error updating service", e);
         }
     }
-    
-
     public Set<ImageModel> uplodImage(MultipartFile[] multipartFiles) throws IOException{
 
         Set<ImageModel> imageModels = new HashSet<>();
@@ -120,11 +106,13 @@ public class ProjectController {
         return projectService.getProjectByUserAndSearch(userId,pageNumber, searchKey);
     }
 
-    @GetMapping({"/getAllProjects"})
-    public List<Project> getAllProjects(@RequestParam(defaultValue = "0") int pageNumber
-            , @RequestParam(defaultValue = "") String searchKey) {
+
+    @GetMapping("/getAllProjects")
+    public List<Project> getAllProjects(@RequestParam(defaultValue = "0") int pageNumber,
+                                        @RequestParam(defaultValue = "") String searchKey) {
         return projectService.getAllProjects(pageNumber, searchKey);
     }
+
     @GetMapping({"/getProjectDetailsById/{projectId}"})
     public Project getProjectDetailsById(@PathVariable("projectId") Integer projectId) {
 
@@ -146,6 +134,4 @@ public class ProjectController {
     public void deleteProjectDetailes(@PathVariable("projectId") Integer projectId) {
         projectService.deleteProjectDetails(projectId);
     }
-
-
 }

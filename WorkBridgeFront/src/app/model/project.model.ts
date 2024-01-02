@@ -1,5 +1,4 @@
 import { FileHandel } from "./file-handel.model";
-import { User } from "./user";
 
 export interface Project {
     projectId: number,
