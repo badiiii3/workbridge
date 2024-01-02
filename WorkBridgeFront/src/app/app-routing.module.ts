@@ -22,6 +22,11 @@ import { TestComponent } from './test/test.component';
 import { AddDemandeComponent } from './component/demande/add-demande/add-demande.component';
 import { ListDemandeFreelanceComponent } from './component/demande/list-demande-freelance/list-demande-freelance.component';
 import { ListDemandeClientComponent } from './component/demande/list-demande-client/list-demande-client.component';
+import { AddRateComponent } from './component/add-rate/add-rate.component';
+import { ListUserComponent } from './component/list-user/list-user.component';
+import { ShowRateComponent } from './show-rate/show-rate.component';
+import { ShowProjectComponent } from './show-project/show-project.component';
+import { ShowServiceComponent } from './show-service/show-service.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,9 +47,17 @@ const routes: Routes = [
 
   { path: 'edit-service/:id', component: EditServiceComponent, resolve: { service: ServiceResolveService }},
   { path: 'home', component: HomeComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' }
+  { path: 'profile/:id', component: ProfileComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'rate/:id', component: AddRateComponent},
+  { path: 'user', component: ListUserComponent},
+  { path: 'show-rate/:id', component: ShowRateComponent},
+  { path: 'user-project/:id', component: ShowProjectComponent },
+  { path: 'user-service/:id', component: ShowServiceComponent },
+
+
 ];
+
 
 @NgModule({
   imports: [CommonModule, BrowserModule ,RouterModule.forRoot(routes)],

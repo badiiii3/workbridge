@@ -3,6 +3,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Project } from '../model/project.model';
 import { FileHandel } from '../model/file-handel.model';
 import { Servic } from '../model/servic.model';
+import { User } from '../model/user';
 
 
 @Injectable({
@@ -86,5 +87,10 @@ export class ImageProcessingService {
     return blob;
 
   }
+  
+  
+  
+
+
 
 }

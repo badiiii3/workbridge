@@ -3,9 +3,11 @@ import { NavigationEnd, Router } from '@angular/router';
 import { tr } from 'date-fns/locale';
 import { Subscription, filter } from 'rxjs';
 import { EventBusService } from 'src/app/_shared/event-bus.service';
+import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/service/auth.service';
 import { StorageService } from 'src/app/service/storage.service';
 import { TokenStorageService } from 'src/app/service/token-storage.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -20,15 +22,19 @@ export class NavbarComponent {
   showFreelancerBoard = false;
   username?: string;
   eventBusSub?: Subscription;
-
+user!:User;
+id:any
   constructor(private storageService: StorageService, private authService: AuthService,
     private router: Router, 
     private tokenStorageService: TokenStorageService,
-     private eventBusService: EventBusService,
+     private eventBusService: EventBusService, private userService : UserService,
    ) { }
    
 
   ngOnInit(): void {
+    this.id = localStorage.getItem("userId")!;
+
+    this.userService.getUserDetailsById(this.id).subscribe(user => this.user = user);
     this.isLoggedIn = !!localStorage.getItem("access_token");
 
     if (this.isLoggedIn) {
@@ -67,7 +73,10 @@ export class NavbarComponent {
 
 
 
-
+  profile(id: any) {
+    // Navigate to the route designed for updating a project, pass projectId as a parameter
+    this.router.navigate(['/profile',id]);
+  }
 
 
 

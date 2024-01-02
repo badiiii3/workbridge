@@ -49,6 +49,7 @@ export class SignupComponent {
   register() {
 
     const registerModel : User ={
+id:null,
       nom: this.getFirstName(),
       prenom: this.getlastName(),
       email: this.getEmail(),

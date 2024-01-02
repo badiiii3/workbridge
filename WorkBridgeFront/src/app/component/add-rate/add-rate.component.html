@@ -1,0 +1,48 @@
+<!-- add-demande.component.html -->
+<div class="container-xxl py-5 position-relative">
+    <div class="container py-5 px-lg-5 position-relative">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center"><span></span>Rate me!<span></span></p>
+            <h1 class="text-center mb-5">Create a Rate </h1>
+        </div>
+     
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form #rateForm="ngForm" (ngSubmit)="addRate(rateForm)">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text"></span>
+
+
+                                    <select  style="height: 50px; width: 400px;"  [(ngModel)]="rateId" (change)="ratee()" name="rate" class="form-select form-select-lg mb-3" >
+                                        <option [ngValue]="0">Rate me !</option>
+
+                                        <option [ngValue]="5">Excelente</option>
+                                        <option [ngValue]="4">Bueno</option>
+                                        <option [ngValue]="3">Bien</option>
+                                        <option [ngValue]="2">Deficientemente</option>
+                                        <option [ngValue]="1">Terrible</option>
+              
+                                              </select>
+
+
+
+                                </div>
+                            </div>
+                          
+                          
+
+                          
+                           
+                            <div class="col-12 mt-2 text-center">
+                                <button class="btn py-sm-3 px-sm-5 rounded-pill mt-3 w-100 py-3" id="navbarcouleur" style="color: white;" type="submit">Add Rate</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

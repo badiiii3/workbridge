@@ -1,1 +1,78 @@
-<p>profile works!</p>
+<div class="container-xxl py-5 position-relative">
+    <div class="container py-5 px-lg-5 position-relative">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center"><span></span>Update a Profile<span></span></p>
+            <h1 class="text-center mb-5">Update Profile</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="wow fadeInUp" data-wow-delay="0.3s">
+                    <form #projectForm="ngForm" (ngSubmit)="Update(projectForm)">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                     
+                                    </span>
+                                    <input matInput class="form-control" placeholder="First Name" [(ngModel)]="user.nom" name="nom">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                    
+                                    </span>
+                                    <input matInput class="form-control" placeholder="Last Name" [(ngModel)]="user.prenom" name="prenom">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                    
+                                    </span>
+                                    <input matInput class="form-control" placeholder="Email" [(ngModel)]="user.email" name="email">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                    
+                                    </span>
+                                    <input matInput class="form-control" placeholder="phone" [(ngModel)]="user.telephone" name="telephone">
+                                </div>
+                            </div>
+                          
+                        
+                            <!-- Other input fields remain the same -->
+                            <div class="col-6">
+                                <div class="dropzone" appDrag (files)="fileDropped($event)">
+                                    <div class="text-wrapper">
+                                        <div class="center">Drag and Drop your Img or 
+                                            <a (click)="selectFile.click()" style="color: blueviolet; font-weight: 800; cursor: pointer;">Browse</a>  a Img
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="file" style="display: none;" #selectFile (change)="onFileSelected($event)">
+                                <div class="mt-5">
+                                    <div class="row">
+                                        <div cols="4" rowHeight="1:1">
+                                            <div *ngFor="let file of user.images; let i = index;">
+                                                <div style="position: relative">
+                                                    <span class="btn-remove-image" (click)="removeImages(i)">X</span>
+                                                    <img [src]="file.url" width="100px" height="100px">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-2">
+                                <button class="btn py-sm-3 px-sm-5 rounded-pill mt-3 w-100 py-3" id="navbarcouleur" style="color: white;" type="submit" >Update profile</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

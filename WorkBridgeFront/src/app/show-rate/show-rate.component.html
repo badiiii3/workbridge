@@ -1,0 +1,29 @@
+<br>
+<h1 style="text-align: center;">Rate !</h1><br>
+
+                <div class="comment-row">
+                    
+                    <div class="comment-container" *ngFor="let c of rates">
+
+                      <div class="user-image-container">
+                        <img src="https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg" alt="Utilisateur 1" style="width: 50px; height: 50px; margin-right: 10px;">
+                      </div>
+                      <div class="comment-content">
+                        <div class="comment-header">
+                          <div class="user-info">
+                            <div class="user-name">{{c.freelance.nom}}</div>
+                            <div class="comment-date">{{c.date}}</div>
+                          </div>
+                          <div class="rating">
+                            <app-star-rating [rating]="+c.etoile"></app-star-rating>
+                          </div>
+                        </div>
+                        <div class="log">
+                          <div class="comment-text">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+       
+

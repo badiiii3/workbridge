@@ -39,6 +39,16 @@ import { AddDemandeComponent } from './component/demande/add-demande/add-demande
 import { ListDemandeClientComponent } from './component/demande/list-demande-client/list-demande-client.component';
 import { ListDemandeFreelanceComponent } from './component/demande/list-demande-freelance/list-demande-freelance.component';
 import { ShowDemandeImageDialogComponent } from './component/demande/show-demande-image-dialog/show-demande-image-dialog.component';
+import { AddRateComponent } from './component/add-rate/add-rate.component';
+import { MatTableModule } from '@angular/material/table';
+import { ListUserComponent } from './component/list-user/list-user.component';
+import { ShowRateComponent } from './show-rate/show-rate.component';
+import { ShowProjectComponent } from './show-project/show-project.component';
+import { ShowServiceComponent } from './show-service/show-service.component';
+import { StarRatingComponent } from './star-rating/star-rating.component';
+import { ShowImagesDialogComponent } from './show-images-dialog/show-images-dialog.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { UpdateUserComponent } from './update-user/update-user.component';
 
 
 
@@ -61,7 +71,7 @@ import { ShowDemandeImageDialogComponent } from './component/demande/show-demand
     AddNewProjectComponent,
     ViewProjectByUserComponent,
     UpdateProjectComponent,
-
+    ListUserComponent,
     HomeComponent,
     ProfileComponent,
     AddServiceComponent,
@@ -73,6 +83,14 @@ import { ShowDemandeImageDialogComponent } from './component/demande/show-demand
     ListDemandeFreelanceComponent,
     ListDemandeClientComponent,
     ShowDemandeImageDialogComponent,
+    AddRateComponent,
+    ShowRateComponent,
+    ShowProjectComponent,
+    ShowServiceComponent,
+    StarRatingComponent,
+    ShowImagesDialogComponent,
+    UpdateUserComponent,
+    
   
  
   ],
@@ -84,8 +102,8 @@ import { ShowDemandeImageDialogComponent } from './component/demande/show-demand
     ReactiveFormsModule,
     RouterModule,
     CommonModule,
-  
-
+    MatGridListModule,
+    MatTableModule,
     MatDialogModule,
     BrowserAnimationsModule,
    

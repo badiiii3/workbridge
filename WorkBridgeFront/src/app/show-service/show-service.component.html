@@ -1,0 +1,41 @@
+<!--list -->
+<div class="container-xxl py-5">
+    <div class="container py-5 px-lg-5">
+      <div class="wow fadeInUp" data-wow-delay="0.1s">
+        <p class="section-title text-secondary justify-content-center">
+          <span></span><span id="couleur">List services</span><span></span>
+        </p>
+        <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="col-12 text-center">
+          </div>
+        </div>
+        <div class="row mt-n2 wow fadeInUp" data-wow-delay="0.3s">
+          <div class="col-12 text-center">
+            <ul class="list-inline mb-5" id="portfolio-flters">
+            </ul>
+          </div>
+        </div>
+        <div class="row g-4 portfolio-container"  >
+          <div class="col-lg-4 col-md-6 portfolio-item first wow fadeInUp" data-wow-delay="0.1s" *ngFor="let service of servicesDetails">
+            <div class="rounded overflow-hidden" >
+              <div class="position-relative overflow-hidden">
+                <img class="img-fluid w-100" [src]="service.serviceImages[0].url" alt="" >
+                <div class="portfolio-overlay">
+                
+                </div>
+              </div>
+              <div class="bg-light p-4">
+                <p class="text-primary fw-medium mb-2">{{ service.nom}}</p>
+                <h5 class="lh-base mb-0">{{ service.description }}</h5>
+                <p class="card-text">{{ service.devis_Hrs  }} </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+    
+  </div>
+  
+  
