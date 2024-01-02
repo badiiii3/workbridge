@@ -40,13 +40,13 @@
                 
                   <div *ngIf="showTable">
                   <!-- Utilise *ngFor pour itérer sur les sous-tableaux de projets -->
-                  <div class="row g-4" *ngFor="let projectsRow of projectsInRows">
+                  <div class="row g-4 full_container" *ngFor="let projectsRow of projectsInRows">
                     <!-- Itère sur les projets dans chaque sous-tableau -->
                     <ng-container *ngFor="let project of projectsRow">
-                      <div class="col-lg-4 col-md-6 portfolio-item second  wow fadeInUp" data-wow-delay="0.1s">
+                      <div class="col-lg-4 col-md-6 portfolio-item second containner  wow fadeInUp" data-wow-delay="0.1s">
                         <div class="rounded overflow-hidden">
-                          <div class="position-relative overflow-hidden">
-                            <img class="img-fluid w-100" [src]="project.projectImages[0].url" alt="">
+                          <div class="position-relative overflow-hidden img_container">
+                            <img class="img-fluid w-100 image" *ngIf="project.projectImages && project.projectImages.length > 0" [src]="project.projectImages[0].url" alt="">
                             <div class="portfolio-overlay">
                               <a class="btn btn-square btn-outline-light mx-1" href='' data-lightbox="portfolio"><i class="fa fa-eye"></i></a>
                               <button class="btn btn-square btn-outline-light mx-1" href=""><i (click)="updateProject(project.projectId)" class="fa fa-link"></i></button>

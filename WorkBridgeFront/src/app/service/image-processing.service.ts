@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Project } from '../model/project.model';
 import { FileHandel } from '../model/file-handel.model';
 
@@ -23,8 +23,9 @@ export class ImageProcessingService {
 
       const finalFileHandel : FileHandel = {
         file: imageFile,
-        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageFile))
+        url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageFile)) as SafeUrl
       };
+      console.log('Processed Image:', finalFileHandel);
 
       projectImagesToFileHandle.push(finalFileHandel);
     }

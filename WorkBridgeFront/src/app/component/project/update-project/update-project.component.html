@@ -69,7 +69,8 @@
                                             <div *ngFor="let file of project.projectImages; let i = index;">
                                                 <div style="position: relative">
                                                     <span class="btn-remove-image" (click)="removeImages(i)">X</span>
-                                                    <img [src]="file.url" width="100px" height="100px">
+                                                    <img [src]="file.url" width="100px" height="100px" (load)="onImageLoad($event, file)">
+                                                    {{ file.url | json }} 
                                                 </div>
                                             </div>
                                         </div>

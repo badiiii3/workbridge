@@ -39,29 +39,27 @@ export class ViewProjectByUserComponent {
     this.router.navigate(['/add-project']);
   }
 
-  public getAllProjects(searchKey: string =""){
+  public getAllProjects(searchKey: string = "") {
     this.showTable = false;
     const userId = localStorage.getItem("userId")!;
-    this.projectService.getAllProjectsUser(userId,this.pageNumber, searchKey)
-    .pipe(
-      map((x: Project[], i) => x.map((project: Project) => this.imageProcessingService.createImages(project)))
-    )
-    .subscribe(
-      (resp: Project[]) =>{
-        console.log(resp);
-        resp.forEach(project => this.projectDetails.push(project));
-        this.showTable=true;
-        if(resp.length==2){
-          this.showLoadMoreProductButton=true;
-        }else{
-          this.showLoadMoreProductButton=false;
+    this.projectService.getAllProjectsUser(userId, this.pageNumber, searchKey)
+      .pipe(
+        map((x: Project[]) => x.map((project: Project) => this.imageProcessingService.createImages(project)))
+      )
+      .subscribe(
+        (resp: Project[]) => {
+          console.log('Processed Projects:', resp); // Log the processed projects
+          resp.forEach(project => this.projectDetails.push(project));
+          this.showTable = true;
+          if (resp.length == 2) {
+            this.showLoadMoreProductButton = true;
+          } else {
+            this.showLoadMoreProductButton = false;
+          }
+        }, (error: HttpErrorResponse) => {
+          console.log('Error:', error); // Log any errors
         }
-        // this.productDetails = resp;
-      }, (error: HttpErrorResponse) => {
-        console.log(error);
-      }
-
-    );
+      );
   }
   loadMoreProject(){
     this.pageNumber= this.pageNumber+1;

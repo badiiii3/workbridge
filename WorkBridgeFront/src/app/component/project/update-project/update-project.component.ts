@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FileHandel } from 'src/app/model/file-handel.model';
 import { Project } from 'src/app/model/project.model';
@@ -54,30 +54,31 @@ ngOnInit(): void {
 
 // Assurez-vous que la fonction onSubmit est correctement définie.
 onSubmit() {
-  // const formData = this.prepareFormData(this.project);
+  const formData = this.prepareFormData(this.project);
+  const userId = localStorage.getItem("userId")!;
 
-  // if (!formData) {
-  //   console.error('Form data is null.');
-  //   return;
-  // }
+  if (!formData) {
+    console.error('Form data is null.');
+    return;
+  }
 
-  // if (this.isNewProject) {
-  //   this.projectService.addProject(formData).subscribe(
-  //     (data: Project) => {
-  //       console.log('Project Details Response:', data);
-  //       this.goToProjectList();
-  //     },
-  //     (error: HttpErrorResponse) => console.error(error)
-  //   );
-  // } else {
-  //   this.projectService.updateProject(this.project.projectId, formData).subscribe(
-  //     (data: Project) => {
-  //       console.log('Project Details Updated:', data);
-  //       this.goToProjectList();
-  //     },
-  //     (error: HttpErrorResponse) => console.error('HTTP Error:', error)
-  //   );
-  // }
+  if (this.isNewProject) {
+    this.projectService.addProject(userId,formData).subscribe(
+      (data: Project) => {
+        console.log('Project Details Response:', data);
+        this.goToProjectList();
+      },
+      (error: HttpErrorResponse) => console.error(error)
+    );
+  } else {
+    this.projectService.updateProject(this.project.projectId, formData).subscribe(
+      (data: Project) => {
+        console.log('Project Details Updated:', data);
+        this.goToProjectList();
+      },
+      (error: HttpErrorResponse) => console.error('HTTP Error:', error)
+    );
+  }
 }
 
 // Assurez-vous que la logique de préparation des données FormData est correcte.
@@ -113,7 +114,7 @@ prepareFormData(project: Project): FormData {
         file: file,
         url: this.sanitizer.bypassSecurityTrustUrl(
           window.URL.createObjectURL(file)
-        ),
+        ) as SafeUrl,
       };
       this.project.projectImages.push(fileHandel);
     }
@@ -126,4 +127,10 @@ prepareFormData(project: Project): FormData {
   fileDropped(fileHandel: any) {
     this.project.projectImages.push(fileHandel);
   }
+
+  onImageLoad(event: Event, file: any) {
+    console.log('Image loaded:', event);
+    console.log('File details:', file);
+}
+
 }
