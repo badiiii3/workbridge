@@ -24,6 +24,8 @@ export class NavbarComponent {
   eventBusSub?: Subscription;
 user!:User;
 id:any
+  isHomePage: boolean | undefined;
+  
   constructor(private storageService: StorageService, private authService: AuthService,
     private router: Router, 
     private tokenStorageService: TokenStorageService,
@@ -68,6 +70,11 @@ id:any
     this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))
       .subscribe((event: any) => {
         
+      });
+
+      this.router.events.pipe(filter((event: any) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.isHomePage = this.router.url === '/home'; // Assurez-vous que '/home' correspond à l'URL de votre page d'accueil
       });
   }
 
